@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AETHERIA STUDIO | Global AI Logo Studio – International Edition</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Complete Arabic, English, and International CJK Commercial Typography Library -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Cairo:wght@400;600;700;800&family=Changa:wght@400;600;700&family=Cinzel:wght@500;700;800&family=El+Messiri:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans:wght@400;600;700&family=Noto+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&family=Orbitron:wght@500;700;800&family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;600;700&family=Raleway:wght@400;600;700&family=Reem+Kufi:wght@500;700&family=Roboto:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'IBM Plex Sans Arabic', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', 'sans-serif'],
+            display: ['Montserrat', 'Cairo', 'sans-serif'],
+          },
+          colors: {
+            obsidian: {
+              950: '#07080c',
+              900: '#0c0e16',
+              850: '#111420',
+              800: '#161a29',
+              700: '#1f253a',
+            },
+            luxe: {
+              indigo: '#6366f1',
+              violet: '#8b5cf6',
+              amber: '#f59e0b',
+              gold: '#fbbf24',
+              emerald: '#10b981'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Studio Scrollbars & Glassmorphism Utilities */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0c0e16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #28304a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4f46e5;
+    }
+
+    .glass-panel {
+      background: rgba(17, 20, 32, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card {
+      background: linear-gradient(145deg, rgba(25, 30, 48, 0.7), rgba(14, 17, 28, 0.85));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 12px 32px -8px rgba(99, 102, 241, 0.18);
+    }
+
+    .studio-grid-bg {
+      background-color: #090b10;
+      background-image: 
+        radial-gradient(rgba(99, 102, 241, 0.16) 1px, transparent 1px),
+        radial-gradient(rgba(245, 158, 11, 0.08) 1px, #090b10 1px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.25); }
+      50% { box-shadow: 0 0 36px rgba(245, 158, 11, 0.35); }
+    }
+    .ai-glow {
+      animation: pulseGlow 3.5s infinite ease-in-out;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .shimmer-bar {
+      background: linear-gradient(90deg, rgba(99,102,241,0.1) 25%, rgba(245,158,11,0.3) 50%, rgba(99,102,241,0.1) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite linear;
+    }
+  </style>
+</head>
+<body class="bg-obsidian-950 text-slate-100 antialiased min-h-screen flex flex-col selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden">
+
+  <!-- Toast / Message Notification Banner (Replaces alert/confirm) -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+  <!-- TOP PERSISTENT NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-white/10">
+    <div class="max-w-[1600px] mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
+      
+      <!-- Brand Logo & Wordmark -->
+      <div class="flex items-center gap-3 shrink-0 cursor-pointer" onclick="switchView('studio')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-600 to-amber-500 p-[1.5px] shadow-lg shadow-indigo-500/20">
+          <div class="w-full h-full bg-obsidian-950 rounded-[10px] flex items-center justify-center">
+            <!-- Custom Geometric Luxury SVG Emblem -->
+            <svg class="w-6 h-6 text-amber-400" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 3L28 25H21.5L16 14.5L10.5 25H4L16 3Z" stroke="url(#aetheriaGrad)" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="16" cy="22" r="2.5" fill="#F59E0B"/>
+              <defs>
+                <linearGradient id="aetheriaGrad" x1="4" y1="3" x2="28" y2="25" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#818CF8"/>
+                  <stop offset="0.5" stop-color="#C084FC"/>
+                  <stop offset="1" stop-color="#FBBF24"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-display font-extrabold tracking-wider text-base sm:text-lg bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">AETHERIA</span>
+            <span class="text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">STUDIO</span>
+          </div>
+          <span class="text-[10px] text-slate-400 tracking-wide hidden sm:block" data-i18n="subtitle">Global AI Brand & Logo Engine</span>
+        </div>
+      </div>
+
+      <!-- Center Navigation Tabs (Desktop) -->
+      <nav class="hidden lg:flex items-center bg-obsidian-900/90 p-1 rounded-xl border border-white/10">
+        <button onclick="switchView('studio')" id="nav-studio" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-indigo-600 text-white shadow-md">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          <span data-i18n="nav_studio">AI Studio</span>
+        </button>
+        <button onclick="switchView('fonts')" id="nav-fonts" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+          <span data-i18n="nav_fonts">Typography Vault</span>
+        </button>
+        <button onclick="switchView('pricing')" id="nav-pricing" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          <span data-i18n="nav_pricing">Plans & Pricing</span>
+        </button>
+        <button onclick="switchView('admin')" id="nav-admin" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span data-i18n="nav_admin">Global Admin</span>
+        </button>
+      </nav>
+
+      <!-- Global Controls: Language Switcher, Currency Switcher, Active Plan Badge -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Language Switcher (12 Languages + Auto RTL/LTR) -->
+        <div class="relative">
+          <select id="languageSelector" onchange="changeLanguage(this.value)" aria-label="Select Language"
+            class="appearance-none bg-obsidian-800 hover:bg-obsidian-700 text-slate-100 text-xs sm:text-sm rounded-xl px-2.5 sm:px-3 py-2 pr-7 border border-white/10 focus:outline-none focus:border-indigo-500 cursor-pointer transition-colors">
+            <option value="en">🇺🇸 English (LTR)</option>
+            <option value="ar">🇸🇦 العربية (RTL)</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="pt">🇧🇷 Português</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="zh">🇨🇳 中文 (简体)</option>
+            <option value="ja">🇯🇵 日本語</option>
+            <option value="ko">🇰🇷 한국어</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+          </select>
+          <span class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-slate-400 text-xs">▼</span>
+        </div>
+
+        <!-- Currency Switcher (10 Currencies) -->
+        <div class="relative">
+          <select id="currencySelector" onchange="changeCurrency(this.value)" aria-label="Select Currency"
+            class="appearance-none bg-obsidian-800 hover:bg-obsidian-700 text-amber-300 font-medium text-xs sm:text-sm rounded-xl px-2.5 sm:px-3 py-2 pr-7 border border-white/10 focus:outline-none focus:border-amber-500 cursor-pointer transition-colors">
+            <option value="USD">USD $</option>
+            <option value="EUR">EUR €</option>
+            <option value="GBP">GBP £</option>
+            <option value="SAR">SAR ﷼</option>
+            <option value="AED">AED د.إ</option>
+            <option value="TRY">TRY ₺</option>
+            <option value="JPY">JPY ¥</option>
+            <option value="KRW">KRW ₩</option>
+            <option value="INR">INR ₹</option>
+            <option value="BRL">BRL R$</option>
+          </select>
+          <span class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-slate-400 text-xs">▼</span>
+        </div>
+
+        <!-- Current Subscription Pill -->
+        <button onclick="switchView('pricing')" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500/15 to-indigo-500/15 border border-amber-500/30 hover:border-amber-400 transition-all">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="currentPlanBadge" class="text-xs font-semibold text-amber-300">PRO STUDIO</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Tabs -->
+    <div class="flex lg:hidden items-center justify-around border-t border-white/10 bg-obsidian-900/95 px-2 py-1.5 overflow-x-auto">
+      <button onclick="switchView('studio')" id="m-nav-studio" class="m-nav-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white whitespace-nowrap" data-i18n="nav_studio">AI Studio</button>
+      <button onclick="switchView('fonts')" id="m-nav-fonts" class="m-nav-tab px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 whitespace-nowrap" data-i18n="nav_fonts">Typography Vault</button>
+      <button onclick="switchView('pricing')" id="m-nav-pricing" class="m-nav-tab px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 whitespace-nowrap" data-i18n="nav_pricing">Plans & Pricing</button>
+      <button onclick="switchView('admin')" id="m-nav-admin" class="m-nav-tab px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 whitespace-nowrap" data-i18n="nav_admin">Global Admin</button>
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION CONTAINER -->
+  <main class="flex-1 max-w-[1600px] w-full mx-auto p-3 sm:p-6">
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 1: AI LOGO STUDIO & INTERACTIVE BRAND IDENTITY WORKSPACE         -->
+    <!-- ===================================================================== -->
+    <section id="view-studio" class="view-section space-y-4">
+      
+      <!-- Top Status & Global CDN / Edge Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-2xl glass-panel text-xs text-slate-400">
+        <div class="flex items-center gap-3 flex-wrap">
+          <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span data-i18n="ai_engine_online">Gemini AI Multimodal Engine Active</span>
+          </span>
+          <span class="hidden sm:inline text-slate-600">|</span>
+          <span id="localizedDateDisplay" class="text-slate-300"></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="applyBilingualPreset('ar-en')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-indigo-500/20 text-slate-200 border border-white/10 transition" title="Load Arabic + English Luxury Preset">
+            🇸🇦/🇺🇸 <span data-i18n="preset_bilingual">Bilingual Preset</span>
+          </button>
+          <button onclick="applyBilingualPreset('jp-en')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-indigo-500/20 text-slate-200 border border-white/10 transition" title="Load Japanese + English Tech Preset">
+            🇯🇵/🇺🇸 Tokyo Tech
+          </button>
+        </div>
+      </div>
+
+      <!-- 3-Column Studio Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        
+        <!-- LEFT PANEL: Brand Prompt, Multilingual Inputs & AI Generation Controls (4 cols) -->
+        <div class="lg:col-span-4 space-y-4 glass-panel rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <h2 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+              <span data-i18n="studio_brief_title">1. Brand Identity Brief</span>
+            </h2>
+            <button onclick="aiAutoConcept()" id="btnAiConcept" class="text-xs px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 font-medium transition flex items-center gap-1">
+              ✨ <span data-i18n="btn_ai_suggest">AI Concept Assist</span>
+            </button>
+          </div>
+
+          <!-- Primary Brand Name -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_brand_name">Primary Brand Name (Any Script)</label>
+            <input type="text" id="brandNameInput" value="AETHERIA" oninput="updateCanvasState()"
+              class="w-full bg-obsidian-900 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition"
+              placeholder="e.g., AETHERIA / أثيريا / アエテリア" />
+          </div>
+
+          <!-- Secondary / Multilingual Tagline or Bilingual Name -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_tagline">Secondary Script / Tagline (Mixed-Language Support)</label>
+            <input type="text" id="taglineInput" value="أثيريا • GLOBAL LUXURY AI" oninput="updateCanvasState()"
+              class="w-full bg-obsidian-900 border border-white/15 rounded-xl px-3.5 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500 transition"
+              placeholder="e.g., أثيريا للتصميم • EST. 2026" />
+          </div>
+
+          <!-- Industry & Creative Direction -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_industry">Industry / Sector</label>
+              <select id="industrySelect" class="w-full bg-obsidian-900 border border-white/15 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-indigo-500">
+                <option value="Luxury Technology & AI">Luxury Tech & AI</option>
+                <option value="Fine Dining & Specialty Coffee">Gastronomy & Coffee</option>
+                <option value="Haute Couture & Cosmetics">Fashion & Beauty</option>
+                <option value="Architecture & Real Estate">Architecture & Estate</option>
+                <option value="Fintech & Global Banking">Fintech & Capital</option>
+                <option value="Sustainable Energy & Eco">Eco & Clean Energy</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_color_mood">Palette Signature</label>
+              <div class="flex items-center gap-1.5 bg-obsidian-900 border border-white/15 rounded-xl px-2.5 py-1.5">
+                <input type="color" id="primaryColorPicker" value="#f59e0b" onchange="updateCanvasState()" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0" title="Accent Color">
+                <input type="color" id="textColorPicker" value="#ffffff" onchange="updateCanvasState()" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0" title="Typography Color">
+                <input type="color" id="bgColorPicker" value="#0c0e16" onchange="updateCanvasState()" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0" title="Canvas Backdrop Color">
+                <button onclick="cyclePalette()" class="ml-auto text-[11px] px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-slate-200">Shuffle</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Symbol Prompt -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_ai_prompt">AI Emblem & Symbol Prompt (Multilingual)</label>
+            <textarea id="aiPromptInput" rows="2"
+              class="w-full bg-obsidian-900 border border-white/15 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-indigo-500 transition resize-none"
+              placeholder="Describe your symbol in English, Arabic, French, Chinese, Japanese...">Minimalist geometric celestial phoenix and golden compass star, clean vector logo mark on solid dark obsidian background, symmetrical luxury emblem</textarea>
+          </div>
+
+          <!-- Style Transformations -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1.5" data-i18n="label_style">AI Style Transformation</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5" id="stylePillsContainer">
+              <button type="button" onclick="selectStyle(this, 'Minimalist Geometric Vector')" class="style-pill active px-2.5 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white border border-indigo-400/50 text-center transition">Geometric</button>
+              <button type="button" onclick="selectStyle(this, 'Luxury Gold Foil Emblem')" class="style-pill px-2.5 py-1.5 rounded-lg text-xs font-medium bg-obsidian-900 text-slate-300 border border-white/10 hover:border-indigo-500/40 text-center transition">Luxury Gold</button>
+              <button type="button" onclick="selectStyle(this, '3D Iridescent Glass & Chrome')" class="style-pill px-2.5 py-1.5 rounded-lg text-xs font-medium bg-obsidian-900 text-slate-300 border border-white/10 hover:border-indigo-500/40 text-center transition">3D Chrome</button>
+              <button type="button" onclick="selectStyle(this, 'Modern Kufic & Architectural Monogram')" class="style-pill px-2.5 py-1.5 rounded-lg text-xs font-medium bg-obsidian-900 text-slate-300 border border-white/10 hover:border-indigo-500/40 text-center transition">Calligraphic</button>
+              <button type="button" onclick="selectStyle(this, 'Cyberpunk Neon Tech Crest')" class="style-pill px-2.5 py-1.5 rounded-lg text-xs font-medium bg-obsidian-900 text-slate-300 border border-white/10 hover:border-indigo-500/40 text-center transition">Cyber Tech</button>
+              <button type="button" onclick="selectStyle(this, 'Organic Botanical Line Art')" class="style-pill px-2.5 py-1.5 rounded-lg text-xs font-medium bg-obsidian-900 text-slate-300 border border-white/10 hover:border-indigo-500/40 text-center transition">Organic Eco</button>
+            </div>
+          </div>
+
+          <!-- Primary AI Generate CTA Button -->
+          <button onclick="generateRealAILogo()" id="btnGenerateLogo"
+            class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-amber-500 hover:from-indigo-500 hover:to-amber-400 text-white font-display font-bold text-sm tracking-wide shadow-xl shadow-indigo-600/25 ai-glow transition-all flex items-center justify-center gap-2 cursor-pointer">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <span data-i18n="btn_generate_ai">Generate Original AI Logo</span>
+          </button>
+
+          <!-- Secondary AI Actions: Style Variation & AI Background -->
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="generateAIVariation()" id="btnVariation" class="py-2 px-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-white/10 text-xs font-medium text-slate-200 transition flex items-center justify-center gap-1.5">
+              🔄 <span data-i18n="btn_variation">AI Variation</span>
+            </button>
+            <button onclick="generateAIBackground()" id="btnAiBg" class="py-2 px-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-white/10 text-xs font-medium text-slate-200 transition flex items-center justify-center gap-1.5">
+              🌌 <span data-i18n="btn_ai_bg">AI Scene Backdrop</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- CENTER PANEL: Interactive Live High-Resolution Logo Canvas & Export (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400" data-i18n="canvas_live_title">Live Vector & AI Canvas</span>
+                <span id="resolutionTag" class="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-slate-400 border border-white/10">2048 × 2048 UHD</span>
+              </div>
+              <!-- Layout Composition Switcher -->
+              <div class="flex items-center gap-1 bg-obsidian-900 p-1 rounded-lg border border-white/10">
+                <button onclick="setLogoLayout('top')" id="layout-top" class="layout-btn px-2 py-1 rounded text-xs bg-indigo-600 text-white" title="Icon Top">⬆️</button>
+                <button onclick="setLogoLayout('left')" id="layout-left" class="layout-btn px-2 py-1 rounded text-xs text-slate-400 hover:text-white" title="Icon Left">⬅️</button>
+                <button onclick="setLogoLayout('right')" id="layout-right" class="layout-btn px-2 py-1 rounded text-xs text-slate-400 hover:text-white" title="Icon Right">➡️</button>
+                <button onclick="setLogoLayout('badge')" id="layout-badge" class="layout-btn px-2 py-1 rounded text-xs text-slate-400 hover:text-white" title="Luxury Crest Frame">🛡️</button>
+              </div>
+            </div>
+
+            <!-- Interactive Canvas Stage -->
+            <div id="canvasWrapper" class="relative w-full aspect-square rounded-2xl studio-grid-bg border border-white/15 overflow-hidden flex items-center justify-center shadow-2xl">
+              
+              <!-- Optional AI Scene Background Layer -->
+              <img id="aiBackdropImage" src="" alt="" class="hidden absolute inset-0 w-full h-full object-cover opacity-45 transition-opacity duration-500" />
+              <div id="canvasColorOverlay" class="absolute inset-0 transition-colors duration-300" style="background-color: rgba(12, 14, 22, 0.88);"></div>
+
+              <!-- Loading Overlay during Real Gemini AI Generation -->
+              <div id="aiLoadingOverlay" class="hidden absolute inset-0 z-30 bg-obsidian-950/85 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center">
+                <div class="w-16 h-16 rounded-2xl border-2 border-indigo-500 border-t-amber-400 animate-spin mb-4"></div>
+                <p id="aiLoadingStatus" class="font-display font-bold text-base text-white mb-1">Synthesizing Bespoke AI Emblem...</p>
+                <p class="text-xs text-slate-400 max-w-xs">Rendering high-resolution brand geometry & multilingual typographic balance</p>
+                <div class="w-48 h-1.5 rounded-full overflow-hidden bg-white/10 mt-4">
+                  <div class="w-full h-full shimmer-bar"></div>
+                </div>
+              </div>
+
+              <!-- Live Composed Logo Preview (DOM + Exportable to Hi-Res Canvas) -->
+              <div id="logoStage" class="relative z-10 flex flex-col items-center justify-center p-6 sm:p-10 text-center transition-all duration-300 max-w-full">
+                
+                <!-- Emblem / AI Generated Image Container -->
+                <div id="emblemFrame" class="relative flex items-center justify-center mb-4 transition-all duration-300">
+                  <!-- Default Initial Custom Vector Emblem (Replaced immediately by Gemini AI Image upon generation) -->
+                  <div id="defaultSvgEmblem" class="w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-br from-indigo-500/20 to-amber-500/20 border border-amber-400/40 flex items-center justify-center shadow-2xl">
+                    <svg id="liveVectorSvg" class="w-20 h-20 sm:w-24 sm:h-24" viewBox="0 0 100 100" fill="none">
+                      <polygon points="50,8 90,78 70,78 50,42 30,78 10,78" stroke="#f59e0b" stroke-width="4" fill="rgba(245,158,11,0.12)"/>
+                      <circle cx="50" cy="66" r="9" fill="#6366f1"/>
+                      <path d="M25 86 H75" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <!-- Real Gemini AI Generated Emblem Image -->
+                  <img id="generatedEmblemImg" src="" alt="AI Generated Logo Symbol" class="hidden w-32 h-32 sm:w-44 sm:h-44 object-cover rounded-2xl shadow-2xl border border-white/15" />
+                </div>
+
+                <!-- Live Typography Block -->
+                <div id="typographyBlock" class="flex flex-col items-center">
+                  <h1 id="previewBrandName" style="font-family: 'Cinzel', serif; color: #ffffff; letter-spacing: 0.16em; font-size: 2.1rem;"
+                    class="font-bold leading-tight break-words max-w-full transition-all">
+                    AETHERIA
+                  </h1>
+                  <p id="previewTagline" style="font-family: 'Cairo', sans-serif; color: #f59e0b; letter-spacing: 0.14em; font-size: 0.85rem;"
+                    class="mt-1.5 font-semibold uppercase tracking-widest transition-all">
+                    أثيريا • GLOBAL LUXURY AI
+                  </p>
+                </div>
+              </div>
+
+              <!-- Subtle Canvas Watermark / Safe-Zone Guides Toggle -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] text-slate-400 z-20 pointer-events-none">
+                <span>AETHERIA ENGINE v3.1</span>
+                <span id="activeFontsBadge" class="bg-black/50 px-2 py-0.5 rounded border border-white/10">Cinzel + Cairo</span>
+              </div>
+            </div>
+
+            <!-- Export & Mockup Action Bar -->
+            <div class="grid grid-cols-3 gap-2.5 mt-4">
+              <button onclick="exportHighResPNG()" class="py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5 shadow-lg shadow-indigo-600/20">
+                ⬇️ <span data-i18n="export_png">Export PNG</span>
+              </button>
+              <button onclick="exportVectorSVG()" class="py-2.5 px-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 text-amber-300 border border-amber-500/30 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                📐 <span data-i18n="export_svg">Export SVG</span>
+              </button>
+              <button onclick="toggleMockupPreview()" class="py-2.5 px-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 text-slate-200 border border-white/10 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                🏢 <span data-i18n="btn_mockup">3D Mockup</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3D Brand Mockup Strip (Hidden by default, toggled via button) -->
+          <div id="mockupDrawer" class="hidden glass-panel rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Real-World Brand Applications</span>
+              <button onclick="toggleMockupPreview()" class="text-xs text-slate-400 hover:text-white">✕</button>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <!-- Luxury Embossed Card Mockup -->
+              <div class="rounded-xl p-4 bg-gradient-to-br from-zinc-900 via-neutral-900 to-black border border-amber-500/30 flex flex-col items-center justify-center text-center shadow-inner h-32">
+                <span class="text-[9px] text-amber-500/70 tracking-widest uppercase mb-1">VIP Matte Black Card</span>
+                <div id="mockupCardTitle" class="font-bold text-sm text-amber-300 tracking-widest">AETHERIA</div>
+                <div id="mockupCardSub" class="text-[10px] text-slate-400 mt-0.5">أثيريا • GLOBAL LUXURY AI</div>
+              </div>
+              <!-- Architectural Facade Sign Mockup -->
+              <div class="rounded-xl p-4 bg-gradient-to-tr from-slate-200 via-white to-slate-300 text-slate-900 flex flex-col items-center justify-center text-center shadow-inner h-32">
+                <span class="text-[9px] text-slate-500 tracking-widest uppercase mb-1">Flagship Boutique Sign</span>
+                <div id="mockupSignTitle" class="font-extrabold text-sm text-slate-900 tracking-widest">AETHERIA</div>
+                <div id="mockupSignSub" class="text-[10px] text-indigo-700 font-semibold mt-0.5">أثيريا • GLOBAL LUXURY AI</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL: Global Typography Inspector & AI Generations History (3 cols) -->
+        <div class="lg:col-span-3 space-y-4 glass-panel rounded-2xl p-4 sm:p-5">
+          <div class="border-b border-white/10 pb-3">
+            <h2 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+              <span data-i18n="inspector_title">2. Typography & Geometry</span>
+            </h2>
+          </div>
+
+          <!-- Primary Font Selector (All 24 Commercial Fonts) -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_primary_font">Primary Font (Commercial Licensed)</label>
+            <select id="primaryFontSelect" onchange="updateCanvasState()"
+              class="w-full bg-obsidian-900 border border-white/15 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-indigo-500">
+              <optgroup label="English Display & Luxury">
+                <option value="Cinzel" selected>Cinzel (Luxury Serif)</option>
+                <option value="Montserrat">Montserrat (Geometric Sans)</option>
+                <option value="Poppins">Poppins (Modern Global)</option>
+                <option value="Playfair Display">Playfair Display (Editorial)</option>
+                <option value="Bebas Neue">Bebas Neue (Condensed Bold)</option>
+                <option value="Oswald">Oswald (Strong Industrial)</option>
+                <option value="Raleway">Raleway (Elegant Sans)</option>
+                <option value="Orbitron">Orbitron (Futuristic Tech)</option>
+              </optgroup>
+              <optgroup label="Arabic Typography (العربية)">
+                <option value="Cairo">Cairo (القاهرة - Modern)</option>
+                <option value="Tajawal">Tajawal (تجوال - Clean)</option>
+                <option value="Reem Kufi">Reem Kufi (ريم كوفي - Geometric)</option>
+                <option value="Amiri">Amiri (أميري - Classical Naskh)</option>
+                <option value="Changa">Changa (تشانغا - Display)</option>
+                <option value="Alexandria">Alexandria (الإسكندرية)</option>
+                <option value="El Messiri">El Messiri (المسيري)</option>
+                <option value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</option>
+              </optgroup>
+              <optgroup label="International & CJK">
+                <option value="Inter">Inter (Universal UI)</option>
+                <option value="Noto Sans">Noto Sans (Global Script)</option>
+                <option value="Noto Serif">Noto Serif (Global Serif)</option>
+                <option value="Roboto">Roboto (Google Standard)</option>
+                <option value="Lato">Lato (Humanist Sans)</option>
+                <option value="Open Sans">Open Sans (Neutral)</option>
+                <option value="Source Sans 3">Source Sans 3 (Adobe)</option>
+                <option value="Noto Sans JP">Noto Sans CJK (JP/KR/SC)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Secondary / Bilingual Font Selector -->
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1" data-i18n="label_secondary_font">Secondary / Bilingual Font</label>
+            <select id="secondaryFontSelect" onchange="updateCanvasState()"
+              class="w-full bg-obsidian-900 border border-white/15 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-indigo-500">
+              <optgroup label="Arabic Typography (العربية)">
+                <option value="Cairo" selected>Cairo (القاهرة)</option>
+                <option value="Tajawal">Tajawal (تجوال)</option>
+                <option value="Reem Kufi">Reem Kufi (ريم كوفي)</option>
+                <option value="IBM Plex Sans Arabic">IBM Plex Sans Arabic</option>
+                <option value="Alexandria">Alexandria (الإسكندرية)</option>
+                <option value="Amiri">Amiri (أميري)</option>
+              </optgroup>
+              <optgroup label="International & CJK">
+                <option value="Montserrat">Montserrat</option>
+                <option value="Inter">Inter</option>
+                <option value="Noto Sans JP">Noto Sans JP (日本語)</option>
+                <option value="Noto Sans KR">Noto Sans KR (한국어)</option>
+                <option value="Noto Sans SC">Noto Sans SC (简体中文)</option>
+                <option value="Noto Sans">Noto Sans (Devanagari/Global)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Sliders: Font Size, Letter Spacing, Emblem Size & Frame Shape -->
+          <div class="space-y-3 pt-1">
+            <div>
+              <div class="flex justify-between text-xs text-slate-400 mb-1">
+                <span data-i18n="slider_font_size">Wordmark Scale</span>
+                <span id="fontSizeVal">34px</span>
+              </div>
+              <input type="range" id="fontSizeSlider" min="18" max="60" value="34" oninput="updateCanvasState()" class="w-full accent-indigo-500 cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs text-slate-400 mb-1">
+                <span data-i18n="slider_tracking">Letter Spacing</span>
+                <span id="trackingVal">0.16em</span>
+              </div>
+              <input type="range" id="trackingSlider" min="0" max="40" value="16" oninput="updateCanvasState()" class="w-full accent-amber-400 cursor-pointer">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs text-slate-400 mb-1">
+                <span data-i18n="slider_emblem_scale">AI Emblem Scale</span>
+                <span id="emblemScaleVal">100%</span>
+              </div>
+              <input type="range" id="emblemScaleSlider" min="60" max="150" value="100" oninput="updateCanvasState()" class="w-full accent-indigo-500 cursor-pointer">
+            </div>
+
+            <!-- Emblem Frame / Mask Style -->
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1.5" data-i18n="label_emblem_mask">Emblem Framing & Blend</label>
+              <div class="grid grid-cols-3 gap-1.5">
+                <button onclick="setEmblemFrame('rounded')" class="px-2 py-1.5 rounded-lg bg-obsidian-900 hover:bg-indigo-600/30 border border-white/10 text-[11px] text-slate-200">Rounded</button>
+                <button onclick="setEmblemFrame('circle')" class="px-2 py-1.5 rounded-lg bg-obsidian-900 hover:bg-indigo-600/30 border border-white/10 text-[11px] text-slate-200">Medallion</button>
+                <button onclick="setEmblemFrame('blend')" class="px-2 py-1.5 rounded-lg bg-obsidian-900 hover:bg-indigo-600/30 border border-white/10 text-[11px] text-slate-200">Screen Blend</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Generated AI Concepts Gallery -->
+          <div class="pt-3 border-t border-white/10">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-200" data-i18n="gallery_title">AI Session Generations</span>
+              <span id="generationCountBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300">0 Generated</span>
+            </div>
+            <div id="aiHistoryGrid" class="grid grid-cols-3 gap-2 max-h-40 overflow-y-auto pr-1">
+              <div class="col-span-3 text-center py-6 px-2 rounded-xl border border-dashed border-white/10 text-[11px] text-slate-400">
+                Click <strong class="text-amber-300">Generate Original AI Logo</strong> to synthesize custom symbols via Gemini AI.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 2: GLOBAL TYPOGRAPHY VAULT (COMMERCIAL FONT LIBRARY)             -->
+    <!-- ===================================================================== -->
+    <section id="view-fonts" class="view-section hidden space-y-6">
+      <div class="glass-panel rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-400">OFL & Apache 2.0 Commercial Licensed</span>
+          <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1" data-i18n="vault_heading">Global Commercial Typography Vault</h2>
+          <p class="text-sm text-slate-400 mt-1 max-w-2xl">Test live multilingual and mixed-script brand wordmarks across 24 curated Arabic, English, and International CJK typefaces. Click any specimen to apply directly to your active logo.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-2 shrink-0">
+          <input type="text" id="vaultPreviewInput" value="AETHERIA • أثيريا • 未来創造" oninput="renderFontVault()"
+            class="bg-obsidian-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 w-full sm:w-72"
+            placeholder="Type live preview text..." />
+          <select id="vaultCategoryFilter" onchange="renderFontVault()"
+            class="bg-obsidian-900 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+            <option value="ALL">All Scripts (24)</option>
+            <option value="Arabic">Arabic (8)</option>
+            <option value="English">English Display (8)</option>
+            <option value="International">International & CJK (8)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Font Cards Grid -->
+      <div id="fontVaultGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 3: INTERNATIONAL SUBSCRIPTIONS & LOCALIZED PRICING               -->
+    <!-- ===================================================================== -->
+    <section id="view-pricing" class="view-section hidden space-y-8">
+      <div class="text-center max-w-3xl mx-auto space-y-3 pt-2">
+        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+          Worldwide Multi-Currency Billing • Instant Activation
+        </span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white" data-i18n="pricing_title">Global Studio Plans & Commercial Licensing</h2>
+        <p class="text-sm sm:text-base text-slate-400">All paid plans include full worldwide commercial trademark rights, vector SVG exports, and priority Gemini AI image generation.</p>
+
+        <!-- Billing Cycle Toggle -->
+        <div class="inline-flex items-center gap-3 bg-obsidian-900 p-1.5 rounded-2xl border border-white/10 mt-3">
+          <button onclick="setBillingCycle('monthly')" id="bill-monthly" class="px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 text-white transition">Monthly</button>
+          <button onclick="setBillingCycle('annual')" id="bill-annual" class="px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5">
+            Annual <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">-20%</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Pricing Tiers -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        
+        <!-- FREE TIER -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="font-display font-bold text-xl text-white">Starter Free</h3>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10">Personal</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">Explore AI logo concepts & multilingual typography.</p>
+            <div class="my-6">
+              <span id="price-free" class="font-display font-extrabold text-4xl text-white">$0</span>
+              <span class="text-xs text-slate-400">/ month</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-300 border-t border-white/10 pt-5">
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 5 AI Logo Generations / month</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 12 Interface Languages (RTL/LTR)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Standard PNG Export (1024px)</li>
+              <li class="flex items-center gap-2 text-slate-500"><span>✕</span> Vector SVG & Trademark Transfer</li>
+            </ul>
+          </div>
+          <button onclick="openCheckoutModal('Starter Free', 0)" class="mt-8 w-full py-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-white/15 text-sm font-semibold text-white transition">
+            Select Free Plan
+          </button>
+        </div>
+
+        <!-- PRO TIER (POPULAR) -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative border-indigo-500/60 shadow-2xl shadow-indigo-600/15">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-amber-500 text-[11px] font-bold uppercase tracking-wider text-white shadow-lg">
+            Most Popular Worldwide
+          </div>
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="font-display font-bold text-xl text-white">Pro Studio</h3>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Commercial</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">For founders, startups, restaurants & international brands.</p>
+            <div class="my-6">
+              <span id="price-pro" class="font-display font-extrabold text-4xl text-amber-300">$29</span>
+              <span class="text-xs text-slate-400">/ month</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-200 border-t border-white/10 pt-5">
+              <li class="flex items-center gap-2"><span class="text-amber-400">✓</span> Unlimited Gemini AI Logo Generations</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">✓</span> Full Commercial Ownership & SVG Vector</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">✓</span> All 24 Commercial Fonts + Bilingual Pairing</li>
+              <li class="flex items-center gap-2"><span class="text-amber-400">✓</span> AI Scene Mockups & Style Variations</li>
+            </ul>
+          </div>
+          <button onclick="openCheckoutModal('Pro Studio', 29)" class="mt-8 w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-sm font-bold text-white shadow-lg shadow-indigo-600/30 transition">
+            Upgrade to Pro Studio
+          </button>
+        </div>
+
+        <!-- PREMIUM AGENCY TIER -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <h3 class="font-display font-bold text-xl text-white">Enterprise & Agency</h3>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">Global Scale</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">For marketing agencies, studios & multi-brand enterprises.</p>
+            <div class="my-6">
+              <span id="price-premium" class="font-display font-extrabold text-4xl text-white">$79</span>
+              <span class="text-xs text-slate-400">/ month</span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-300 border-t border-white/10 pt-5">
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Everything in Pro Studio + 4K UHD</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Dedicated High-Speed AI API Endpoint</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Multi-Brand Client Workspaces (10 Seats)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Priority Global Support & Custom Fonts</li>
+            </ul>
+          </div>
+          <button onclick="openCheckoutModal('Enterprise & Agency', 79)" class="mt-8 w-full py-3 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-amber-500/40 text-sm font-semibold text-amber-300 transition">
+            Activate Enterprise Plan
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- VIEW 4: GLOBAL ADMINISTRATION DASHBOARD                               -->
+    <!-- ===================================================================== -->
+    <section id="view-admin" class="view-section hidden space-y-6">
+      
+      <!-- Admin Header -->
+      <div class="glass-panel rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider border border-emerald-500/30">System Healthy • 99.98% Uptime</span>
+            <span class="text-xs text-slate-400">Edge Nodes: 42 Global Regions</span>
+          </div>
+          <h2 class="font-display font-extrabold text-2xl text-white mt-1" data-i18n="admin_title">Global Platform Administration & Telemetry</h2>
+        </div>
+        <div class="flex flex-wrap gap-1.5 bg-obsidian-900 p-1 rounded-xl border border-white/10">
+          <button onclick="switchAdminTab('overview')" id="admintab-overview" class="admin-subtab px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white">Analytics & API</button>
+          <button onclick="switchAdminTab('users')" id="admintab-users" class="admin-subtab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white">Global Users & Billing</button>
+          <button onclick="switchAdminTab('localization')" id="admintab-localization" class="admin-subtab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white">i18n & Fonts</button>
+          <button onclick="switchAdminTab('security')" id="admintab-security" class="admin-subtab px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white">Security & Edge</button>
+        </div>
+      </div>
+
+      <!-- KPI Cards Row (Formatted Dynamically in Active Currency & Locale) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-panel rounded-2xl p-5">
+          <span class="text-xs text-slate-400">Active Global Creators</span>
+          <div id="kpi-users" class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">148,920</div>
+          <span class="text-xs text-emerald-400 mt-1 inline-block">↑ +18.4% across 114 countries</span>
+        </div>
+        <div class="glass-panel rounded-2xl p-5">
+          <span class="text-xs text-slate-400">Monthly Recurring Revenue</span>
+          <div id="kpi-mrr" class="font-display font-extrabold text-2xl sm:text-3xl text-amber-300 mt-1">$412,850</div>
+          <span class="text-xs text-emerald-400 mt-1 inline-block">↑ Stripe, Mada, Alipay & UPI</span>
+        </div>
+        <div class="glass-panel rounded-2xl p-5">
+          <span class="text-xs text-slate-400">AI Logo Generations (24h)</span>
+          <div id="kpi-gens" class="font-display font-extrabold text-2xl sm:text-3xl text-indigo-400 mt-1">64,310</div>
+          <span class="text-xs text-slate-400 mt-1 inline-block">Avg. Latency: 1.42s (Gemini 3.1)</span>
+        </div>
+        <div class="glass-panel rounded-2xl p-5">
+          <span class="text-xs text-slate-400">AI Compute Cost / Gen</span>
+          <div id="kpi-cost" class="font-display font-extrabold text-2xl sm:text-3xl text-emerald-400 mt-1">$0.018</div>
+          <span class="text-xs text-slate-400 mt-1 inline-block">Gross Margin: 94.2%</span>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-VIEW 1: ANALYTICS & AI API MANAGEMENT -->
+      <div id="admin-panel-overview" class="admin-panel grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Regional Usage & Cost Chart -->
+        <div class="lg:col-span-7 glass-panel rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-display font-bold text-base text-white">Worldwide Generation Volume by Region</h3>
+            <span class="text-xs text-slate-400">Real-Time Telemetry</span>
+          </div>
+          <div class="space-y-3 pt-2">
+            <div>
+              <div class="flex justify-between text-xs mb-1"><span>MENA (Saudi Arabia, UAE, Egypt)</span><span class="text-amber-300 font-semibold">31% (Arabic & Bilingual)</span></div>
+              <div class="w-full h-2.5 bg-obsidian-900 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style="width: 31%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1"><span>North America & UK</span><span class="text-indigo-300 font-semibold">28%</span></div>
+              <div class="w-full h-2.5 bg-obsidian-900 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full" style="width: 28%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1"><span>Europe (DACH, France, Spain, Italy, Turkey)</span><span class="text-emerald-300 font-semibold">22%</span></div>
+              <div class="w-full h-2.5 bg-obsidian-900 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style="width: 22%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs mb-1"><span>East Asia & India (JP, KR, CN, IN)</span><span class="text-pink-300 font-semibold">19%</span></div>
+              <div class="w-full h-2.5 bg-obsidian-900 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-pink-500 to-rose-400 rounded-full" style="width: 19%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI API Endpoint Controls -->
+        <div class="lg:col-span-5 glass-panel rounded-2xl p-5 space-y-4">
+          <h3 class="font-display font-bold text-base text-white">AI Model & API Gateway Controls</h3>
+          <div class="space-y-3 text-xs">
+            <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 flex items-center justify-between">
+              <div>
+                <div class="font-bold text-white">gemini-3.1-flash-image</div>
+                <div class="text-slate-400">Primary Vector & Emblem Synthesis</div>
+              </div>
+              <label class="inline-flex items-center cursor-pointer">
+                <input type="checkbox" checked onchange="showToast('Updated AI Image Gateway routing', 'success')" class="sr-only peer">
+                <div class="w-9 h-5 bg-slate-700 rounded-full peer peer-checked:bg-emerald-500 after:content-[''] after:block after:w-4 after:h-4 after:bg-white after:rounded-full after:m-0.5 peer-checked:after:translate-x-4 transition-all"></div>
+              </label>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 flex items-center justify-between">
+              <div>
+                <div class="font-bold text-white">gemini-3-flash-preview</div>
+                <div class="text-slate-400">Multilingual Brand Concept & Palette AI</div>
+              </div>
+              <label class="inline-flex items-center cursor-pointer">
+                <input type="checkbox" checked onchange="showToast('Updated Text Intelligence routing', 'success')" class="sr-only peer">
+                <div class="w-9 h-5 bg-slate-700 rounded-full peer peer-checked:bg-emerald-500 after:content-[''] after:block after:w-4 after:h-4 after:bg-white after:rounded-full after:m-0.5 peer-checked:after:translate-x-4 transition-all"></div>
+              </label>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 flex items-center justify-between">
+              <div>
+                <div class="font-bold text-white">Auto Prompt Translation Layer</div>
+                <div class="text-slate-400">12-Language Semantic Enrichment</div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold">Enabled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-VIEW 2: GLOBAL USER & PAYMENT REPORTS -->
+      <div id="admin-panel-users" class="admin-panel hidden glass-panel rounded-2xl p-5 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <h3 class="font-display font-bold text-base text-white">International Subscribers & Payment Ledger</h3>
+          <input type="text" id="adminUserSearch" onkeyup="filterAdminUsers()" placeholder="Filter by customer, country, or gateway..."
+            class="bg-obsidian-900 border border-white/15 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-indigo-500 w-full sm:w-64">
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="text-slate-400 border-b border-white/10 uppercase">
+              <tr>
+                <th class="py-3 px-3">Customer / Studio</th>
+                <th class="py-3 px-3">Country & Locale</th>
+                <th class="py-3 px-3">Plan</th>
+                <th class="py-3 px-3">Payment Provider</th>
+                <th class="py-3 px-3">Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersTableBody" class="divide-y divide-white/5 text-slate-200">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-VIEW 3: MULTI-LANGUAGE & FONT LICENSE MANAGER -->
+      <div id="admin-panel-localization" class="admin-panel hidden grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="glass-panel rounded-2xl p-5 space-y-3">
+          <h3 class="font-display font-bold text-base text-white">12-Language Localization Matrix</h3>
+          <p class="text-xs text-slate-400">All UI dictionaries, RTL layout mirrors, and Intl formatting rules verified.</p>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs pt-2">
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇺🇸 English</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇸🇦 العربية</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇫🇷 Français</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇪🇸 Español</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇩🇪 Deutsch</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇹🇷 Türkçe</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇧🇷 Português</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇮🇹 Italiano</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇨🇳 中文</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇯🇵 日本語</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇰🇷 한국어</span><span class="text-emerald-400">100%</span></div>
+            <div class="p-2.5 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between"><span>🇮🇳 हिन्दी</span><span class="text-emerald-400">100%</span></div>
+          </div>
+        </div>
+        <div class="glass-panel rounded-2xl p-5 space-y-3">
+          <h3 class="font-display font-bold text-base text-white">Commercial Font & CDN Asset Governance</h3>
+          <p class="text-xs text-slate-400">24 active commercial typefaces served via global low-latency edge CDN.</p>
+          <div class="space-y-2 text-xs pt-2">
+            <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between items-center">
+              <span>Arabic Collection (Cairo, Tajawal, Reem Kufi, Amiri +4)</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">SIL OFL 1.1</span>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between items-center">
+              <span>English Display Collection (Cinzel, Montserrat, Poppins +5)</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">SIL OFL 1.1</span>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-900 border border-white/10 flex justify-between items-center">
+              <span>International & CJK (Noto Sans/Serif CJK, Inter, Roboto +4)</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">OFL / Apache 2.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-VIEW 4: SECURITY & EDGE MONITORING -->
+      <div id="admin-panel-security" class="admin-panel hidden glass-panel rounded-2xl p-5 space-y-4">
+        <h3 class="font-display font-bold text-base text-white">Global Security, Compliance & CDN Monitoring</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-4 rounded-xl bg-obsidian-900 border border-white/10 space-y-1">
+            <div class="text-emerald-400 font-bold">GDPR, PDPL & CCPA Compliant</div>
+            <p class="text-slate-400">Regional data residency enforced across EU-Frankfurt, ME-Riyadh, US-East, and AP-Tokyo clusters.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-obsidian-900 border border-white/10 space-y-1">
+            <div class="text-indigo-400 font-bold">Zero-Trust API Key Vault</div>
+            <p class="text-slate-400">All Gemini AI requests authenticated via ephemeral runtime tokens with automatic rate-limit backoff.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-obsidian-900 border border-white/10 space-y-1">
+            <div class="text-amber-400 font-bold">PCI-DSS Level 1 Payments</div>
+            <p class="text-slate-400">Tokenized global checkout supporting Stripe, Apple Pay, Mada, STC Pay, Alipay, and UPI.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- INTERNATIONAL CHECKOUT MODAL                                          -->
+  <!-- ===================================================================== -->
+  <div id="checkoutModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-panel rounded-3xl max-w-md w-full p-6 border border-white/15 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest text-amber-400 font-bold">Secure Global Checkout</span>
+          <h3 id="checkoutPlanName" class="font-display font-bold text-lg text-white">Pro Studio</h3>
+        </div>
+        <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-300">✕</button>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-obsidian-900 border border-white/10 flex items-center justify-between">
+        <span class="text-xs text-slate-400">Total Due Today (<span id="checkoutCurrencyLabel">USD</span>)</span>
+        <span id="checkoutAmountDisplay" class="font-display font-extrabold text-2xl text-amber-300">$29.00</span>
+      </div>
+
+      <!-- Localized Payment Methods -->
+      <div class="space-y-2">
+        <label class="block text-xs font-medium text-slate-300">Select International Payment Method</label>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <button type="button" onclick="selectPaymentMethod(this)" class="pay-method active p-2.5 rounded-xl bg-indigo-600/20 border border-indigo-500 text-white font-medium text-left">💳 International Card</button>
+          <button type="button" onclick="selectPaymentMethod(this)" class="pay-method p-2.5 rounded-xl bg-obsidian-900 border border-white/10 text-slate-300 font-medium text-left">🍎 Apple / Google Pay</button>
+          <button type="button" onclick="selectPaymentMethod(this)" class="pay-method p-2.5 rounded-xl bg-obsidian-900 border border-white/10 text-slate-300 font-medium text-left">🇸🇦 Mada / STC Pay</button>
+          <button type="button" onclick="selectPaymentMethod(this)" class="pay-method p-2.5 rounded-xl bg-obsidian-900 border border-white/10 text-slate-300 font-medium text-left">🌏 Alipay / UPI</button>
+        </div>
+      </div>
+
+      <button onclick="completeSubscription()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-amber-500 hover:from-indigo-500 hover:to-amber-400 text-white font-display font-bold text-sm shadow-lg transition">
+        Confirm & Activate Plan
+      </button>
+    </div>
+  </div>
+
+  <!-- Hidden High-Res Export Canvas -->
+  <canvas id="exportCanvas" width="2048" height="2048" class="hidden"></canvas>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION LOGIC & GEMINI AI INTEGRATION                             -->
+  <!-- ===================================================================== -->
+  <script>
+    // =========================================================================
+    // 1. GLOBAL STATE & INTERNATIONALIZATION (12 LANGUAGES + RTL/LTR)
+    // =========================================================================
+    const state = {
+      lang: 'en',
+      currency: 'USD',
+      billingCycle: 'monthly',
+      activePlan: 'Pro Studio',
+      selectedStyle: 'Minimalist Geometric Vector',
+      layout: 'top',
+      emblemFrame: 'rounded',
+      generatedImages: [],
+      currentEmblemDataUrl: null,
+      currentBackdropDataUrl: null,
+      mockupOpen: false
+    };
+
+    const CURRENCIES = {
+      USD: { rate: 1, locale: 'en-US' },
+      EUR: { rate: 0.92, locale: 'de-DE' },
+      GBP: { rate: 0.79, locale: 'en-GB' },
+      SAR: { rate: 3.75, locale: 'ar-SA' },
+      AED: { rate: 3.67, locale: 'ar-AE' },
+      TRY: { rate: 34.2, locale: 'tr-TR' },
+      JPY: { rate: 153.5, locale: 'ja-JP' },
+      KRW: { rate: 1385, locale: 'ko-KR' },
+      INR: { rate: 84.1, locale: 'en-IN' },
+      BRL: { rate: 5.75, locale: 'pt-BR' }
+    };
+
+    const TRANSLATIONS = {
+      en: {
+        subtitle: "Global AI Brand & Logo Engine",
+        nav_studio: "AI Studio",
+        nav_fonts: "Typography Vault",
+        nav_pricing: "Plans & Pricing",
+        nav_admin: "Global Admin",
+        ai_engine_online: "Gemini AI Multimodal Engine Active",
+        preset_bilingual: "Bilingual Preset",
+        studio_brief_title: "1. Brand Identity Brief",
+        btn_ai_suggest: "AI Concept Assist",
+        label_brand_name: "Primary Brand Name (Any Script)",
+        label_tagline: "Secondary Script / Tagline (Mixed-Language Support)",
+        label_industry: "Industry / Sector",
+        label_color_mood: "Palette Signature",
+        label_ai_prompt: "AI Emblem & Symbol Prompt (Multilingual)",
+        label_style: "AI Style Transformation",
+        btn_generate_ai: "Generate Original AI Logo",
+        btn_variation: "AI Variation",
+        btn_ai_bg: "AI Scene Backdrop",
+        canvas_live_title: "Live Vector & AI Canvas",
+        export_png: "Export PNG",
+        export_svg: "Export SVG",
+        btn_mockup: "3D Mockup",
+        inspector_title: "2. Typography & Geometry",
+        label_primary_font: "Primary Font (Commercial Licensed)",
+        label_secondary_font: "Secondary / Bilingual Font",
+        slider_font_size: "Wordmark Scale",
+        slider_tracking: "Letter Spacing",
+        slider_emblem_scale: "AI Emblem Scale",
+        label_emblem_mask: "Emblem Framing & Blend",
+        gallery_title: "AI Session Generations",
+        vault_heading: "Global Commercial Typography Vault",
+        pricing_title: "Global Studio Plans & Commercial Licensing",
+        admin_title: "Global Platform Administration & Telemetry"
+      },
+      ar: {
+        subtitle: "منصة الذكاء الاصطناعي العالمية لتصميم الشعارات والهوية",
+        nav_studio: "استوديو الذكاء الاصطناعي",
+        nav_fonts: "مكتبة الخطوط العالمية",
+        nav_pricing: "الباقات والأسعار",
+        nav_admin: "الإدارة العالمية",
+        ai_engine_online: "محرك Gemini AI متعدد الوسائط نشط",
+        preset_bilingual: "نموذج ثنائي اللغة",
+        studio_brief_title: "١. موجز الهوية التجارية",
+        btn_ai_suggest: "اقتراح ذكي للهوية",
+        label_brand_name: "اسم العلامة التجارية الرئيسي",
+        label_tagline: "الشعار الفرعي أو الاسم بلغة ثانية",
+        label_industry: "القطاع / المجال",
+        label_color_mood: "لوحة الألوان",
+        label_ai_prompt: "وصف الرمز بالذكاء الاصطناعي (بأي لغة)",
+        label_style: "تحويل النمط الفني",
+        btn_generate_ai: "توليد شعار أصلي بالذكاء الاصطناعي",
+        btn_variation: "تنويع الشعار",
+        btn_ai_bg: "خلفية مشهد AI",
+        canvas_live_title: "لوحة التصميم المباشرة",
+        export_png: "تصدير PNG",
+        export_svg: "تصدير SVG",
+        btn_mockup: "نماذج ثلاثية الأبعاد",
+        inspector_title: "٢. الخطوط والهندسة البصرية",
+        label_primary_font: "الخط الرئيسي (مرخص تجارياً)",
+        label_secondary_font: "الخط الثانوي / ثنائي اللغة",
+        slider_font_size: "حجم النص الرئيسي",
+        slider_tracking: "تباعد الأحرف",
+        slider_emblem_scale: "حجم الرمز",
+        label_emblem_mask: "إطار ودمج الرمز",
+        gallery_title: "تصاميم الجلسة المولدة",
+        vault_heading: "خزنة الخطوط التجارية العالمية",
+        pricing_title: "باقات الاستوديو العالمية والترخيص التجاري",
+        admin_title: "لوحة الإدارة العالمية والتحليلات"
+      },
+      fr: {
+        subtitle: "Studio Mondial de Logos & Identité par IA",
+        nav_studio: "Studio IA",
+        nav_fonts: "Typographie",
+        nav_pricing: "Tarifs & Plans",
+        nav_admin: "Admin Global",
+        ai_engine_online: "Moteur Multimodal Gemini AI Actif",
+        preset_bilingual: "Modèle Bilingue",
+        studio_brief_title: "1. Brief d'Identité de Marque",
+        btn_ai_suggest: "Assistant Concept IA",
+        label_brand_name: "Nom Principal de la Marque",
+        label_tagline: "Slogan ou Second Script (Multilingue)",
+        label_industry: "Secteur d'Activité",
+        label_color_mood: "Palette de Couleurs",
+        label_ai_prompt: "Prompt du Symbole IA (Toutes Langues)",
+        label_style: "Transformation de Style IA",
+        btn_generate_ai: "Générer un Logo IA Original",
+        btn_variation: "Variation IA",
+        btn_ai_bg: "Arrière-plan IA",
+        canvas_live_title: "Canevas Vectoriel & IA en Direct",
+        export_png: "Exporter PNG",
+        export_svg: "Exporter SVG",
+        btn_mockup: "Maquettes 3D",
+        inspector_title: "2. Typographie & Géométrie",
+        label_primary_font: "Police Principale (Licence Commerciale)",
+        label_secondary_font: "Police Secondaire / Bilingue",
+        slider_font_size: "Taille du Titre",
+        slider_tracking: "Espacement des Lettres",
+        slider_emblem_scale: "Échelle de l'Emblème",
+        label_emblem_mask: "Cadre & Fusion",
+        gallery_title: "Générations IA de la Session",
+        vault_heading: "Bibliothèque Typographique Commerciale",
+        pricing_title: "Abonnements Internationaux & Licences",
+        admin_title: "Administration Mondiale & Télémétrie"
+      },
+      es: {
+        subtitle: "Estudio Global de Logotipos e Identidad con IA",
+        nav_studio: "Estudio IA",
+        nav_fonts: "Tipografía",
+        nav_pricing: "Planes y Precios",
+        nav_admin: "Admin Global",
+        ai_engine_online: "Motor Multimodal Gemini AI Activo",
+        preset_bilingual: "Preajuste Bilingüe",
+        studio_brief_title: "1. Brief de Identidad de Marca",
+        btn_ai_suggest: "Asistente de Concepto IA",
+        label_brand_name: "Nombre Principal de la Marca",
+        label_tagline: "Eslogan o Segundo Idioma",
+        label_industry: "Industria / Sector",
+        label_color_mood: "Paleta de Colores",
+        label_ai_prompt: "Descripción del Símbolo IA",
+        label_style: "Transformación de Estilo IA",
+        btn_generate_ai: "Generar Logotipo IA Original",
+        btn_variation: "Variación IA",
+        btn_ai_bg: "Fondo Escénico IA",
+        canvas_live_title: "Lienzo Interactivo Vector e IA",
+        export_png: "Exportar PNG",
+        export_svg: "Exportar SVG",
+        btn_mockup: "Mockups 3D",
+        inspector_title: "2. Tipografía y Geometría",
+        label_primary_font: "Fuente Principal (Uso Comercial)",
+        label_secondary_font: "Fuente Secundaria / Bilingüe",
+        slider_font_size: "Tamaño de Marca",
+        slider_tracking: "Espaciado de Letras",
+        slider_emblem_scale: "Escala del Emblema",
+        label_emblem_mask: "Marco y Fusión",
+        gallery_title: "Generaciones IA de la Sesión",
+        vault_heading: "Bóveda Global de Tipografía Comercial",
+        pricing_title: "Planes Internacionales y Licencias",
+        admin_title: "Administración Global y Analítica"
+      },
+      de: {
+        subtitle: "Globales KI-Logo- & Markenidentitäts-Studio",
+        nav_studio: "KI-Studio",
+        nav_fonts: "Typografie",
+        nav_pricing: "Preise & Pläne",
+        nav_admin: "Global Admin",
+        ai_engine_online: "Gemini KI-Engine Aktiv",
+        preset_bilingual: "Zweisprachig",
+        studio_brief_title: "1. Markenidentitäts-Briefing",
+        btn_ai_suggest: "KI-Konzept-Assistent",
+        label_brand_name: "Primärer Markenname",
+        label_tagline: "Slogan / Zweitsprache",
+        label_industry: "Branche / Sektor",
+        label_color_mood: "Farbpalette",
+        label_ai_prompt: "KI-Symbol-Prompt (Mehrsprachig)",
+        label_style: "KI-Stiltransformation",
+        btn_generate_ai: "Originales KI-Logo Generieren",
+        btn_variation: "KI-Variation",
+        btn_ai_bg: "KI-Hintergrund",
+        canvas_live_title: "Live-Vektor- & KI-Leinwand",
+        export_png: "PNG Export",
+        export_svg: "SVG Export",
+        btn_mockup: "3D-Mockups",
+        inspector_title: "2. Typografie & Geometrie",
+        label_primary_font: "Hauptschriftart (Kommerziell)",
+        label_secondary_font: "Zweitschrift / Zweisprachig",
+        slider_font_size: "Schriftgröße",
+        slider_tracking: "Zeichenabstand",
+        slider_emblem_scale: "Symbolgröße",
+        label_emblem_mask: "Rahmen & Mischung",
+        gallery_title: "KI-Sitzungsgenerierungen",
+        vault_heading: "Globale Kommerzielle Schriftbibliothek",
+        pricing_title: "Internationale Abonnements & Lizenzen",
+        admin_title: "Globale Plattform-Administration"
+      },
+      tr: {
+        subtitle: "Küresel Yapay Zeka Logo ve Marka Stüdyosu",
+        nav_studio: "AI Stüdyo",
+        nav_fonts: "Yazı Tipi Kasası",
+        nav_pricing: "Planlar ve Fiyatlar",
+        nav_admin: "Küresel Yönetim",
+        ai_engine_online: "Gemini AI Motoru Aktif",
+        preset_bilingual: "İki Dilli Şablon",
+        studio_brief_title: "1. Marka Kimliği Özeti",
+        btn_ai_suggest: "AI Konsept Önerisi",
+        label_brand_name: "Ana Marka Adı",
+        label_tagline: "Slogan veya İkinci Dil",
+        label_industry: "Sektör",
+        label_color_mood: "Renk Paleti",
+        label_ai_prompt: "AI Sembol İstemi (Çok Dilli)",
+        label_style: "AI Stil Dönüşümü",
+        btn_generate_ai: "Özgün AI Logo Oluştur",
+        btn_variation: "AI Varyasyon",
+        btn_ai_bg: "AI Sahne Arka Planı",
+        canvas_live_title: "Canlı Vektör ve AI Tuvali",
+        export_png: "PNG İndir",
+        export_svg: "SVG İndir",
+        btn_mockup: "3D Maketler",
+        inspector_title: "2. Tipografi ve Geometri",
+        label_primary_font: "Ana Yazı Tipi (Ticari Lisanslı)",
+        label_secondary_font: "İkincil Yazı Tipi",
+        slider_font_size: "Yazı Boyutu",
+        slider_tracking: "Harf Aralığı",
+        slider_emblem_scale: "Amblem Ölçeği",
+        label_emblem_mask: "Çerçeve ve Karışım",
+        gallery_title: "Oturum AI Üretimleri",
+        vault_heading: "Küresel Ticari Tipografi Kütüphanesi",
+        pricing_title: "Uluslararası Planlar ve Ticari Lisans",
+        admin_title: "Küresel Platform Yönetimi"
+      },
+      pt: {
+        subtitle: "Estúdio Global de Logotipos e Identidade com IA",
+        nav_studio: "Estúdio IA",
+        nav_fonts: "Tipografia",
+        nav_pricing: "Planos e Preços",
+        nav_admin: "Admin Global",
+        ai_engine_online: "Motor Multimodal Gemini AI Ativo",
+        preset_bilingual: "Modelo Bilíngue",
+        studio_brief_title: "1. Briefing de Identidade",
+        btn_ai_suggest: "Assistente de Conceito IA",
+        label_brand_name: "Nome Principal da Marca",
+        label_tagline: "Slogan ou Segundo Idioma",
+        label_industry: "Setor / Indústria",
+        label_color_mood: "Paleta de Cores",
+        label_ai_prompt: "Prompt do Símbolo IA",
+        label_style: "Transformação de Estilo IA",
+        btn_generate_ai: "Gerar Logotipo IA Original",
+        btn_variation: "Variação IA",
+        btn_ai_bg: "Fundo de Cena IA",
+        canvas_live_title: "Tela Interativa Vetor & IA",
+        export_png: "Exportar PNG",
+        export_svg: "Exportar SVG",
+        btn_mockup: "Mockups 3D",
+        inspector_title: "2. Tipografia e Geometria",
+        label_primary_font: "Fonte Principal (Licença Comercial)",
+        label_secondary_font: "Fonte Secundária / Bilíngue",
+        slider_font_size: "Escala da Marca",
+        slider_tracking: "Espaçamento",
+        slider_emblem_scale: "Escala do Emblema",
+        label_emblem_mask: "Moldura e Mistura",
+        gallery_title: "Gerações IA da Sessão",
+        vault_heading: "Cofre Global de Tipografia Comercial",
+        pricing_title: "Planos Internacionais e Licenciamento",
+        admin_title: "Administração Global e Telemetria"
+      },
+      it: {
+        subtitle: "Studio Globale di Loghi e Brand Identity con IA",
+        nav_studio: "Studio IA",
+        nav_fonts: "Tipografia",
+        nav_pricing: "Piani e Prezzi",
+        nav_admin: "Admin Globale",
+        ai_engine_online: "Motore Multimodale Gemini AI Attivo",
+        preset_bilingual: "Preset Bilingue",
+        studio_brief_title: "1. Brief Identità del Brand",
+        btn_ai_suggest: "Assistente Concept IA",
+        label_brand_name: "Nome Principale del Brand",
+        label_tagline: "Payoff o Seconda Lingua",
+        label_industry: "Settore",
+        label_color_mood: "Palette Colori",
+        label_ai_prompt: "Prompt Simbolo IA (Multilingue)",
+        label_style: "Trasformazione Stile IA",
+        btn_generate_ai: "Genera Logo IA Originale",
+        btn_variation: "Variazione IA",
+        btn_ai_bg: "Sfondo Scena IA",
+        canvas_live_title: "Area di Lavoro Vettoriale & IA",
+        export_png: "Esporta PNG",
+        export_svg: "Esporta SVG",
+        btn_mockup: "Mockup 3D",
+        inspector_title: "2. Tipografia e Geometria",
+        label_primary_font: "Font Principale (Uso Commerciale)",
+        label_secondary_font: "Font Secondario / Bilingue",
+        slider_font_size: "Dimensione Testo",
+        slider_tracking: "Spaziatura Lettere",
+        slider_emblem_scale: "Scala Emblema",
+        label_emblem_mask: "Cornice e Fusione",
+        gallery_title: "Generazioni IA della Sessione",
+        vault_heading: "Libreria Tipografica Commerciale",
+        pricing_title: "Abbonamenti Internazionali e Licenze",
+        admin_title: "Amministrazione Globale"
+      },
+      zh: {
+        subtitle: "全球人工智能标志与品牌识别设计工作室",
+        nav_studio: "AI 设计室",
+        nav_fonts: "全球字体库",
+        nav_pricing: "订阅与定价",
+        nav_admin: "全球管理后台",
+        ai_engine_online: "Gemini AI 多模态引擎已就绪",
+        preset_bilingual: "双语品牌预设",
+        studio_brief_title: "1. 品牌识别简报",
+        btn_ai_suggest: "AI 创意灵感助手",
+        label_brand_name: "主品牌名称（支持多语言）",
+        label_tagline: "副标题 / 双语标语",
+        label_industry: "所属行业",
+        label_color_mood: "品牌色彩方案",
+        label_ai_prompt: "AI 标志图形提示词（支持中文）",
+        label_style: "AI 艺术风格转换",
+        btn_generate_ai: "生成原创 AI 标志",
+        btn_variation: "AI 变体衍生",
+        btn_ai_bg: "AI 场景背景",
+        canvas_live_title: "实时矢量与 AI 画布",
+        export_png: "导出高清 PNG",
+        export_svg: "导出矢量 SVG",
+        btn_mockup: "3D 品牌样机",
+        inspector_title: "2. 字体排版与几何调节",
+        label_primary_font: "主字体（可商用授权）",
+        label_secondary_font: "副字体 / 双语搭配",
+        slider_font_size: "字体大小",
+        slider_tracking: "字间距",
+        slider_emblem_scale: "图形比例",
+        label_emblem_mask: "徽章边框与融合",
+        gallery_title: "本次会话 AI 生成记录",
+        vault_heading: "全球商用字体资产库",
+        pricing_title: "国际订阅方案与商业授权",
+        admin_title: "全球平台管理与遥测中心"
+      },
+      ja: {
+        subtitle: "グローバルAIロゴ＆ブランドアイデンティティスタジオ",
+        nav_studio: "AIスタジオ",
+        nav_fonts: "フォントライブラリ",
+        nav_pricing: "料金プラン",
+        nav_admin: "グローバル管理",
+        ai_engine_online: "Gemini AI マルチモーダルエンジン稼働中",
+        preset_bilingual: "バイリンガル設定",
+        studio_brief_title: "1. ブランドブリーフ",
+        btn_ai_suggest: "AIコンセプト提案",
+        label_brand_name: "メインブランド名",
+        label_tagline: "タグライン / 多言語サブ表記",
+        label_industry: "業界・カテゴリー",
+        label_color_mood: "カラーパレット",
+        label_ai_prompt: "AIシンボルプロンプト（日本語対応）",
+        label_style: "AIスタイル変換",
+        btn_generate_ai: "オリジナルAIロゴを生成",
+        btn_variation: "AIバリエーション",
+        btn_ai_bg: "AI背景シーン生成",
+        canvas_live_title: "ライブベクター＆AIキャンバス",
+        export_png: "PNG出力",
+        export_svg: "SVG出力",
+        btn_mockup: "3Dモックアップ",
+        inspector_title: "2. タイポグラフィ＆配置",
+        label_primary_font: "メインフォント（商用利用可）",
+        label_secondary_font: "サブ / 多言語フォント",
+        slider_font_size: "文字サイズ",
+        slider_tracking: "文字間隔",
+        slider_emblem_scale: "シンボルサイズ",
+        label_emblem_mask: "フレーム＆ブレンド",
+        gallery_title: "生成履歴",
+        vault_heading: "グローバル商用フォントライブラリ",
+        pricing_title: "国際サブスクリプション＆商用ライセンス",
+        admin_title: "グローバル管理ダッシュボード"
+      },
+      ko: {
+        subtitle: "글로벌 AI 로고 및 브랜드 아이덴티티 스튜디오",
+        nav_studio: "AI 스튜디오",
+        nav_fonts: "타이포그래피",
+        nav_pricing: "요금제 및 플랜",
+        nav_admin: "글로벌 관리자",
+        ai_engine_online: "Gemini AI 멀티모달 엔진 활성",
+        preset_bilingual: "이중 언어 프리셋",
+        studio_brief_title: "1. 브랜드 아이덴티티 브리프",
+        btn_ai_suggest: "AI 컨셉 추천",
+        label_brand_name: "기본 브랜드명",
+        label_tagline: "태그라인 / 다국어 표기",
+        label_industry: "산업 분야",
+        label_color_mood: "컬러 팔레트",
+        label_ai_prompt: "AI 심볼 프롬프트 (한국어 지원)",
+        label_style: "AI 스타일 변환",
+        btn_generate_ai: "오리지널 AI 로고 생성",
+        btn_variation: "AI 변형 생성",
+        btn_ai_bg: "AI 배경 생성",
+        canvas_live_title: "라이브 벡터 & AI 캔버스",
+        export_png: "PNG 내보내기",
+        export_svg: "SVG 내보내기",
+        btn_mockup: "3D 목업",
+        inspector_title: "2. 타이포그래피 및 비율",
+        label_primary_font: "기본 글꼴 (상업용 라이선스)",
+        label_secondary_font: "보조 / 다국어 글꼴",
+        slider_font_size: "글자 크기",
+        slider_tracking: "자간",
+        slider_emblem_scale: "심볼 크기",
+        label_emblem_mask: "프레임 및 블렌드",
+        gallery_title: "세션 AI 생성 기록",
+        vault_heading: "글로벌 상업용 폰트 라이브러리",
+        pricing_title: "글로벌 구독 플랜 및 상업적 라이선스",
+        admin_title: "글로벌 플랫폼 관리 대시보드"
+      },
+      hi: {
+        subtitle: "ग्लोबल एआई लोगो और ब्रांड पहचान स्टूडियो",
+        nav_studio: "एआई स्टूडियो",
+        nav_fonts: "फ़ॉन्ट लाइब्रेरी",
+        nav_pricing: "प्लान और मूल्य",
+        nav_admin: "ग्लोबल एडमिन",
+        ai_engine_online: "Gemini AI इंजन सक्रिय है",
+        preset_bilingual: "द्विभाषी प्रीसेट",
+        studio_brief_title: "1. ब्रांड पहचान विवरण",
+        btn_ai_suggest: "एआई सुझाव",
+        label_brand_name: "मुख्य ब्रांड नाम",
+        label_tagline: "टैगलाइन / द्वितीयक भाषा",
+        label_industry: "उद्योग / क्षेत्र",
+        label_color_mood: "रंग पैलेट",
+        label_ai_prompt: "एआई प्रतीक प्रॉम्प्ट (बहुभाषी)",
+        label_style: "एआई स्टाइल रूपांतरण",
+        btn_generate_ai: "मौलिक एआई लोगो बनाएं",
+        btn_variation: "एआई वेरिएशन",
+        btn_ai_bg: "एआई पृष्ठभूमि",
+        canvas_live_title: "लाइव वेक्टर और एआई कैनवास",
+        export_png: "PNG डाउनलोड",
+        export_svg: "SVG डाउनलोड",
+        btn_mockup: "3D मॉकअप",
+        inspector_title: "2. टाइपोग्राफी और ज्यामिति",
+        label_primary_font: "मुख्य फ़ॉन्ट (व्यावसायिक लाइसेंस)",
+        label_secondary_font: "द्वितीयक फ़ॉन्ट",
+        slider_font_size: "फ़ॉन्ट आकार",
+        slider_tracking: "अक्षर अंतराल",
+        slider_emblem_scale: "प्रतीक आकार",
+        label_emblem_mask: "फ्रेम और ब्लेंड",
+        gallery_title: "एआई जेनरेशन गैलरी",
+        vault_heading: "वैश्विक व्यावसायिक फ़ॉन्ट लाइब्रेरी",
+        pricing_title: "अंतर्राष्ट्रीय सदस्यता और लाइसेंसिंग",
+        admin_title: "वैश्विक प्रशासन डैशबोर्ड"
+      }
+    };
+
+    // Complete 24 Commercial Fonts Catalog
+    const FONT_LIBRARY = [
+      // Arabic (8)
+      { name: "Cairo", category: "Arabic", style: "Modern Geometric Arabic", license: "SIL OFL 1.1", sample: "أثيريا للتصميم • AETHERIA" },
+      { name: "Tajawal", category: "Arabic", style: "Clean Humanist Arabic", license: "SIL OFL 1.1", sample: "رؤية عالمية • GLOBAL VISION" },
+      { name: "Changa", category: "Arabic", style: "Contemporary Display", license: "SIL OFL 1.1", sample: "إبداع بلا حدود • LIMITLESS" },
+      { name: "Amiri", category: "Arabic", style: "Classical Naskh Luxury", license: "SIL OFL 1.1", sample: "دار الفخامة • HAUTE MAISON" },
+      { name: "Reem Kufi", category: "Arabic", style: "Architectural Kufic", license: "SIL OFL 1.1", sample: "هندسة المستقبل • FUTURE" },
+      { name: "Alexandria", category: "Arabic", style: "Balanced Editorial", license: "SIL OFL 1.1", sample: "الإسكندرية • ALEXANDRIA" },
+      { name: "El Messiri", category: "Arabic", style: "Expressive Modern Serif", license: "SIL OFL 1.1", sample: "المسيري • ARTISAN STUDIO" },
+      { name: "IBM Plex Sans Arabic", category: "Arabic", style: "Corporate Tech Arabic", license: "SIL OFL 1.1", sample: "تقنية الغد • NEXTGEN AI" },
+      // English (8)
+      { name: "Montserrat", category: "English", style: "Urban Geometric Sans", license: "SIL OFL 1.1", sample: "MONOLITH STUDIO" },
+      { name: "Poppins", category: "English", style: "Friendly Global Geometric", license: "SIL OFL 1.1", sample: "VELOCE DIGITAL" },
+      { name: "Cinzel", category: "English", style: "Imperial Luxury Serif", license: "SIL OFL 1.1", sample: "AETHERIA ROYAL" },
+      { name: "Bebas Neue", category: "English", style: "High-Impact Condensed", license: "SIL OFL 1.1", sample: "APEX PERFORMANCE" },
+      { name: "Playfair Display", category: "English", style: "High-Contrast Editorial", license: "SIL OFL 1.1", sample: "Maison Lumière" },
+      { name: "Oswald", category: "English", style: "Bold Architectural Sans", license: "SIL OFL 1.1", sample: "TITAN VENTURES" },
+      { name: "Raleway", category: "English", style: "Refined Thin-to-Bold", license: "SIL OFL 1.1", sample: "CELESTIA GROUP" },
+      { name: "Orbitron", category: "English", style: "Sci-Fi & Web3 Tech", license: "SIL OFL 1.1", sample: "HYPERION LABS" },
+      // International & CJK (8)
+      { name: "Noto Sans", category: "International", style: "Universal Multi-Script", license: "SIL OFL 1.1", sample: "GLOBAL • वैश्विक • عالمي" },
+      { name: "Noto Serif", category: "International", style: "Classical Multi-Script", license: "SIL OFL 1.1", sample: "HERITAGE • PATRIMOINE" },
+      { name: "Roboto", category: "International", style: "Modern Neo-Grotesque", license: "Apache 2.0", sample: "SYSTEMS WORLDWIDE" },
+      { name: "Inter", category: "International", style: "Precision UI & Brand", license: "SIL OFL 1.1", sample: "NORDIC CAPITAL" },
+      { name: "Lato", category: "International", style: "Warm Corporate Sans", license: "SIL OFL 1.1", sample: "SOLARIS ENERGY" },
+      { name: "Open Sans", category: "International", style: "Neutral Legible Sans", license: "SIL OFL 1.1", sample: "OPEN HORIZON" },
+      { name: "Source Sans 3", category: "International", style: "Adobe Open Sans", license: "SIL OFL 1.1", sample: "PACIFICA TRADE" },
+      { name: "Noto Sans JP", category: "International", style: "CJK Japanese / Korean / CN", license: "SIL OFL 1.1", sample: "東京スタジオ • 서울 • 上海" }
+    ];
+
+    const ADMIN_USERS_DATA = [
+      { name: "Al-Noor Luxury Group", country: "🇸🇦 Riyadh, Saudi Arabia", plan: "Enterprise & Agency", gateway: "Mada / Stripe", status: "Active" },
+      { name: "Atelier Lumière Paris", country: "🇫🇷 Paris, France", plan: "Pro Studio", gateway: "Stripe EU (SEPA)", status: "Active" },
+      { name: "Kurogane Robotics KK", country: "🇯🇵 Tokyo, Japan", plan: "Enterprise & Agency", gateway: "Apple Pay / JCB", status: "Active" },
+      { name: "Vanguardia Creative", country: "🇧🇷 São Paulo, Brazil", plan: "Pro Studio", gateway: "Stripe / Pix", status: "Active" },
+      { name: "Bosphorus Roasters", country: "🇹🇷 Istanbul, Turkey", plan: "Pro Studio", gateway: "Troy / Mastercard", status: "Active" },
+      { name: "Deccan FinTech Pvt", country: "🇮🇳 Bengaluru, India", plan: "Enterprise & Agency", gateway: "UPI / Razorpay", status: "Active" }
+    ];
+
+    // =========================================================================
+    // 2. GEMINI API INTEGRATION (REAL AI IMAGE & BRAND CONCEPT ENGINE)
+    // =========================================================================
+    const apiKey = ""; // Runtime environment provides key automatically when empty
+
+    async function fetchWithBackoff(url, options, maxRetries = 4) {
+      let delay = 1000;
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+          const res = await fetch(url, options);
+          if (!res.ok) {
+            if (res.status === 429 || res.status >= 500) {
+              throw new Error(`HTTP ${res.status}`);
+            }
+            const errText = await res.text();
+            throw new Error(errText || `HTTP ${res.status}`);
+          }
+          return await res.json();
+        } catch (err) {
+          if (attempt === maxRetries) throw err;
+          await new Promise(r => setTimeout(r, delay));
+          delay *= 2;
+        }
+      }
+    }
+
+    // Real AI Logo Symbol Generation via gemini-3.1-flash-image
+    async function generateRealAILogo(customPromptOverride = null) {
+      const btn = document.getElementById('btnGenerateLogo');
+      const overlay = document.getElementById('aiLoadingOverlay');
+      const statusText = document.getElementById('aiLoadingStatus');
+
+      const brand = document.getElementById('brandNameInput').value.trim() || "AETHERIA";
+      const industry = document.getElementById('industrySelect').value;
+      const userPrompt = customPromptOverride || document.getElementById('aiPromptInput').value.trim();
+      const accentHex = document.getElementById('primaryColorPicker').value;
+      const bgHex = document.getElementById('bgColorPicker').value;
+
+      const engineeredPrompt = `Create an iconic, ultra-clean vector-style logo emblem/symbol only (no messy small text paragraphs) for a "${industry}" brand named "${brand}". Visual concept: ${userPrompt}. Artistic direction: ${state.selectedStyle}. Primary accent color ${accentHex} centered on a clean solid ${bgHex} background, symmetrical, centered composition, sharp edges, Behance and Dribbble award-winning brand mark.`;
+
+      try {
+        btn.disabled = true;
+        overlay.classList.remove('hidden');
+        statusText.textContent = "Synthesizing Original AI Emblem via Gemini 3.1...";
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{
+            role: 'user',
+            parts: [{ text: engineeredPrompt }]
+          }],
+          generationConfig: {
+            responseModalities: ['IMAGE'],
+            imageConfig: { aspectRatio: "1:1" }
+          }
+        };
+
+        const result = await fetchWithBackoff(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+        if (!part || !part.inlineData?.data) {
+          throw new Error("No image returned from Gemini AI.");
+        }
+
+        const imageUrl = `data:${part.inlineData.mimeType || 'image/png'};base64,${part.inlineData.data}`;
+        applyGeneratedEmblem(imageUrl, userPrompt);
+        showToast("Original AI logo symbol synthesized!", "success");
+
+      } catch (err) {
+        console.error(err);
+        showToast("AI generation encountered a temporary network issue. Please try again.", "error");
+      } finally {
+        btn.disabled = false;
+        overlay.classList.add('hidden');
+      }
+    }
+
+    // Generate AI Style Variation
+    async function generateAIVariation() {
+      const basePrompt = document.getElementById('aiPromptInput').value.trim();
+      const variations = [
+        "alternative negative-space monogram geometric interpretation",
+        "refined golden ratio line-art luxury crest variation",
+        "bold futuristic emblem with clean symmetrical facets"
+      ];
+      const pick = variations[Math.floor(Math.random() * variations.length)];
+      await generateRealAILogo(`${basePrompt}, ${pick}`);
+    }
+
+    // Generate AI Brand Backdrop Scene
+    async function generateAIBackground() {
+      const overlay = document.getElementById('aiLoadingOverlay');
+      const statusText = document.getElementById('aiLoadingStatus');
+      const industry = document.getElementById('industrySelect').value;
+
+      try {
+        overlay.classList.remove('hidden');
+        statusText.textContent = "Rendering Architectural Brand Scene Backdrop...";
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{
+            role: 'user',
+            parts: [{ text: `Abstract dark luxury studio architectural backdrop with subtle ambient rim lighting and obsidian marble texture suitable for presenting a ${industry} logo, no text, minimalist moody lighting.` }]
+          }],
+          generationConfig: {
+            responseModalities: ['IMAGE'],
+            imageConfig: { aspectRatio: "1:1" }
+          }
+        };
+
+        const result = await fetchWithBackoff(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const part = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+        if (part?.inlineData?.data) {
+          const bgUrl = `data:${part.inlineData.mimeType || 'image/png'};base64,${part.inlineData.data}`;
+          state.currentBackdropDataUrl = bgUrl;
+          const imgEl = document.getElementById('aiBackdropImage');
+          imgEl.src = bgUrl;
+          imgEl.classList.remove('hidden');
+          document.getElementById('canvasColorOverlay').style.backgroundColor = 'rgba(10, 12, 20, 0.52)';
+          showToast("AI Scene Backdrop applied to canvas!", "success");
+        }
+      } catch (e) {
+        showToast("Could not generate backdrop right now.", "error");
+      } finally {
+        overlay.classList.add('hidden');
+      }
+    }
+
+    // AI Brand Concept & Multilingual Tagline Assistant via gemini-3-flash-preview
+    async function aiAutoConcept() {
+      const btn = document.getElementById('btnAiConcept');
+      const brand = document.getElementById('brandNameInput').value.trim() || "AETHERIA";
+      const industry = document.getElementById('industrySelect').value;
+
+      try {
+        btn.disabled = true;
+        btn.innerHTML = "⏳ Thinking...";
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const payload = {
+          contents: [{
+            parts: [{
+              text: `You are an elite global brand director. For the brand "${brand}" in "${industry}" (current UI language code: ${state.lang}), generate a cohesive brand identity concept.`
+            }]
+          }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            responseSchema: {
+              type: "OBJECT",
+              properties: {
+                tagline: { type: "STRING", description: "Short bilingual or localized luxury tagline (max 32 chars)" },
+                symbolPrompt: { type: "STRING", description: "Detailed visual prompt for generating a clean geometric logo symbol" },
+                accentHex: { type: "STRING", description: "Hex color code for accent e.g. #F59E0B" },
+                bgHex: { type: "STRING", description: "Dark luxury background hex color e.g. #0B0F19" }
+              },
+              required: ["tagline", "symbolPrompt", "accentHex", "bgHex"]
+            }
+          }
+        };
+
+        const result = await fetchWithBackoff(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const rawJson = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (rawJson) {
+          const concept = JSON.parse(rawJson);
+          document.getElementById('taglineInput').value = concept.tagline;
+          document.getElementById('aiPromptInput').value = concept.symbolPrompt;
+          if (/^#[0-9A-F]{6}$/i.test(concept.accentHex)) {
+            document.getElementById('primaryColorPicker').value = concept.accentHex;
+          }
+          if (/^#[0-9A-F]{6}$/i.test(concept.bgHex)) {
+            document.getElementById('bgColorPicker').value = concept.bgHex;
+          }
+          updateCanvasState();
+          showToast("AI Brand Director updated your tagline, palette & symbol prompt!", "success");
+        }
+      } catch (e) {
+        showToast("Concept assistant unavailable momentarily.", "error");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `✨ <span data-i18n="btn_ai_suggest">${TRANSLATIONS[state.lang]?.btn_ai_suggest || 'AI Concept Assist'}</span>`;
+      }
+    }
+
+    function applyGeneratedEmblem(dataUrl, promptLabel) {
+      state.currentEmblemDataUrl = dataUrl;
+      state.generatedImages.unshift({ url: dataUrl, prompt: promptLabel });
+
+      document.getElementById('defaultSvgEmblem').classList.add('hidden');
+      const imgEl = document.getElementById('generatedEmblemImg');
+      imgEl.src = dataUrl;
+      imgEl.classList.remove('hidden');
+
+      renderHistoryGallery();
+    }
+
+    function renderHistoryGallery() {
+      const grid = document.getElementById('aiHistoryGrid');
+      const badge = document.getElementById('generationCountBadge');
+      badge.textContent = `${state.generatedImages.length} Generated`;
+
+      if (state.generatedImages.length === 0) return;
+      grid.innerHTML = state.generatedImages.map((item, idx) => `
+        <button onclick="selectHistoryEmblem(${idx})" class="group relative aspect-square rounded-xl overflow-hidden border border-white/15 hover:border-amber-400 transition focus:outline-none">
+          <img src="${item.url}" alt="AI Concept ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+          <span class="absolute bottom-1 right-1 text-[9px] bg-black/70 text-white px-1 rounded">#${state.generatedImages.length - idx}</span>
+        </button>
+      `).join('');
+    }
+
+    function selectHistoryEmblem(index) {
+      const item = state.generatedImages[index];
+      if (!item) return;
+      state.currentEmblemDataUrl = item.url;
+      document.getElementById('defaultSvgEmblem').classList.add('hidden');
+      const imgEl = document.getElementById('generatedEmblemImg');
+      imgEl.src = item.url;
+      imgEl.classList.remove('hidden');
+      showToast("Restored AI concept onto canvas", "info");
+    }
+
+    // =========================================================================
+    // 3. INTERACTIVE CANVAS & TYPOGRAPHY CONTROLS
+    // =========================================================================
+    function updateCanvasState() {
+      const brandName = document.getElementById('brandNameInput').value || "BRAND";
+      const tagline = document.getElementById('taglineInput').value;
+      const primaryFont = document.getElementById('primaryFontSelect').value;
+      const secondaryFont = document.getElementById('secondaryFontSelect').value;
+      const accentColor = document.getElementById('primaryColorPicker').value;
+      const textColor = document.getElementById('textColorPicker').value;
+      const bgColor = document.getElementById('bgColorPicker').value;
+
+      const fontSize = document.getElementById('fontSizeSlider').value;
+      const tracking = (document.getElementById('trackingSlider').value / 100).toFixed(2);
+      const emblemScale = document.getElementById('emblemScaleSlider').value;
+
+      document.getElementById('fontSizeVal').textContent = `${fontSize}px`;
+      document.getElementById('trackingVal').textContent = `${tracking}em`;
+      document.getElementById('emblemScaleVal').textContent = `${emblemScale}%`;
+      document.getElementById('activeFontsBadge').textContent = `${primaryFont} + ${secondaryFont}`;
+
+      // Update Live Preview DOM
+      const previewBrand = document.getElementById('previewBrandName');
+      const previewTag = document.getElementById('previewTagline');
+      previewBrand.textContent = brandName;
+      previewBrand.style.fontFamily = `'${primaryFont}', sans-serif`;
+      previewBrand.style.color = textColor;
+      previewBrand.style.fontSize = `${fontSize}px`;
+      previewBrand.style.letterSpacing = `${tracking}em`;
+
+      previewTag.textContent = tagline;
+      previewTag.style.fontFamily = `'${secondaryFont}', sans-serif`;
+      previewTag.style.color = accentColor;
+
+      // Update Default SVG colors if still visible
+      const svgPoly = document.querySelector('#liveVectorSvg polygon');
+      const svgLine = document.querySelector('#liveVectorSvg path');
+      if (svgPoly) svgPoly.setAttribute('stroke', accentColor);
+      if (svgLine) svgLine.setAttribute('stroke', accentColor);
+
+      // Update Emblem Scale
+      const emblemFrame = document.getElementById('emblemFrame');
+      emblemFrame.style.transform = `scale(${emblemScale / 100})`;
+
+      // Update Backdrop Overlay
+      if (!state.currentBackdropDataUrl) {
+        document.getElementById('canvasColorOverlay').style.backgroundColor = bgColor;
+      }
+
+      // Update Mockups
+      document.getElementById('mockupCardTitle').textContent = brandName;
+      document.getElementById('mockupCardTitle').style.fontFamily = `'${primaryFont}', sans-serif`;
+      document.getElementById('mockupCardSub').textContent = tagline;
+      document.getElementById('mockupSignTitle').textContent = brandName;
+      document.getElementById('mockupSignTitle').style.fontFamily = `'${primaryFont}', sans-serif`;
+      document.getElementById('mockupSignSub').textContent = tagline;
+    }
+
+    function setLogoLayout(layout) {
+      state.layout = layout;
+      const stage = document.getElementById('logoStage');
+      const typo = document.getElementById('typographyBlock');
+      const emblem = document.getElementById('emblemFrame');
+
+      document.querySelectorAll('.layout-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white');
+        b.classList.add('text-slate-400');
+      });
+      document.getElementById(`layout-${layout}`).classList.add('bg-indigo-600', 'text-white');
+
+      stage.className = "relative z-10 flex items-center justify-center p-6 sm:p-10 transition-all duration-300 max-w-full";
+      stage.style.border = "none";
+      stage.style.borderRadius = "0";
+
+      if (layout === 'top') {
+        stage.classList.add('flex-col', 'text-center');
+        typo.className = "flex flex-col items-center";
+        emblem.classList.add('mb-4');
+        emblem.classList.remove('mr-5', 'ml-5');
+      } else if (layout === 'left') {
+        stage.classList.add('flex-row', 'text-left', 'gap-5');
+        typo.className = "flex flex-col items-start";
+        emblem.classList.remove('mb-4', 'ml-5');
+      } else if (layout === 'right') {
+        stage.classList.add('flex-row-reverse', 'text-right', 'gap-5');
+        typo.className = "flex flex-col items-end";
+        emblem.classList.remove('mb-4', 'mr-5');
+      } else if (layout === 'badge') {
+        stage.classList.add('flex-col', 'text-center');
+        stage.style.border = `2px solid ${document.getElementById('primaryColorPicker').value}`;
+        stage.style.borderRadius = "28px";
+        typo.className = "flex flex-col items-center";
+        emblem.classList.add('mb-4');
+      }
+    }
+
+    function setEmblemFrame(mode) {
+      state.emblemFrame = mode;
+      const img = document.getElementById('generatedEmblemImg');
+      const svgBox = document.getElementById('defaultSvgEmblem');
+      img.classList.remove('rounded-2xl', 'rounded-full', 'mix-blend-screen');
+      svgBox.classList.remove('rounded-3xl', 'rounded-full');
+
+      if (mode === 'circle') {
+        img.classList.add('rounded-full');
+        svgBox.classList.add('rounded-full');
+      } else if (mode === 'blend') {
+        img.classList.add('rounded-2xl', 'mix-blend-screen');
+        svgBox.classList.add('rounded-3xl');
+      } else {
+        img.classList.add('rounded-2xl');
+        svgBox.classList.add('rounded-3xl');
+      }
+    }
+
+    function selectStyle(btn, styleName) {
+      state.selectedStyle = styleName;
+      document.querySelectorAll('.style-pill').forEach(p => {
+        p.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-400/50');
+        p.classList.add('bg-obsidian-900', 'text-slate-300', 'border-white/10');
+      });
+      btn.classList.remove('bg-obsidian-900', 'text-slate-300', 'border-white/10');
+      btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-400/50');
+    }
+
+    function cyclePalette() {
+      const palettes = [
+        { accent: '#f59e0b', text: '#ffffff', bg: '#0c0e16' },
+        { accent: '#38bdf8', text: '#f8fafc', bg: '#09111e' },
+        { accent: '#10b981', text: '#ecfdf5', bg: '#071510' },
+        { accent: '#e879f9', text: '#ffffff', bg: '#13091f' },
+        { accent: '#d97706', text: '#18181b', bg: '#fafaf9' }
+      ];
+      const next = palettes[Math.floor(Math.random() * palettes.length)];
+      document.getElementById('primaryColorPicker').value = next.accent;
+      document.getElementById('textColorPicker').value = next.text;
+      document.getElementById('bgColorPicker').value = next.bg;
+      updateCanvasState();
+    }
+
+    function applyBilingualPreset(type) {
+      if (type === 'ar-en') {
+        document.getElementById('brandNameInput').value = "QASR AL-NOOR";
+        document.getElementById('taglineInput').value = "قصر النور • ROYAL HOSPITALITY";
+        document.getElementById('primaryFontSelect').value = "Cinzel";
+        document.getElementById('secondaryFontSelect').value = "Reem Kufi";
+        document.getElementById('aiPromptInput').value = "Minimalist geometric Arabian star lantern and architectural arch in brushed gold, symmetrical luxury emblem";
+      } else {
+        document.getElementById('brandNameInput').value = "KINETIX";
+        document.getElementById('taglineInput').value = "未来技術 • TOKYO ROBOTICS";
+        document.getElementById('primaryFontSelect').value = "Orbitron";
+        document.getElementById('secondaryFontSelect').value = "Noto Sans JP";
+        document.getElementById('aiPromptInput').value = "Futuristic minimalist origami cyber crane geometric vector icon, sharp lines, glowing indigo and silver";
+      }
+      updateCanvasState();
+      showToast("Loaded multilingual brand identity preset!", "info");
+    }
+
+    function toggleMockupPreview() {
+      state.mockupOpen = !state.mockupOpen;
+      const drawer = document.getElementById('mockupDrawer');
+      drawer.classList.toggle('hidden', !state.mockupOpen);
+    }
+
+    // =========================================================================
+    // 4. HIGH-RESOLUTION PNG & VECTOR SVG EXPORT ENGINE
+    // =========================================================================
+    async function exportHighResPNG() {
+      const canvas = document.getElementById('exportCanvas');
+      const ctx = canvas.getContext('2d');
+      const W = 2048, H = 2048;
+
+      const bgColor = document.getElementById('bgColorPicker').value;
+      const accentColor = document.getElementById('primaryColorPicker').value;
+      const textColor = document.getElementById('textColorPicker').value;
+      const brandName = document.getElementById('brandNameInput').value || "AETHERIA";
+      const tagline = document.getElementById('taglineInput').value || "";
+      const primaryFont = document.getElementById('primaryFontSelect').value;
+      const secondaryFont = document.getElementById('secondaryFontSelect').value;
+
+      // 1. Background
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, W, H);
+
+      // 2. Emblem (AI Generated Image or Geometric Vector Fallback)
+      if (state.currentEmblemDataUrl) {
+        await new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => {
+            const size = 680;
+            const x = (W - size) / 2;
+            const y = 420;
+            ctx.save();
+            ctx.beginPath();
+            if (state.emblemFrame === 'circle') {
+              ctx.arc(W / 2, y + size / 2, size / 2, 0, Math.PI * 2);
+            } else {
+              ctx.roundRect(x, y, size, size, 64);
+            }
+            ctx.clip();
+            ctx.drawImage(img, x, y, size, size);
+            ctx.restore();
+            resolve();
+          };
+          img.onerror = resolve;
+          img.src = state.currentEmblemDataUrl;
+        });
+      } else {
+        // Draw Crisp Vector Emblem
+        ctx.save();
+        ctx.strokeStyle = accentColor;
+        ctx.lineWidth = 22;
+        ctx.beginPath();
+        ctx.moveTo(W / 2, 460);
+        ctx.lineTo(W / 2 + 260, 920);
+        ctx.lineTo(W / 2 - 260, 920);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fillStyle = "#6366f1";
+        ctx.beginPath();
+        ctx.arc(W / 2, 810, 58, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 3. Brand Typography
+      ctx.textAlign = "center";
+      ctx.fillStyle = textColor;
+      ctx.font = `bold 150px "${primaryFont}", sans-serif`;
+      ctx.fillText(brandName, W / 2, 1340);
+
+      // 4. Secondary / Bilingual Tagline
+      ctx.fillStyle = accentColor;
+      ctx.font = `600 62px "${secondaryFont}", sans-serif`;
+      ctx.fillText(tagline, W / 2, 1460);
+
+      // Trigger Download
+      const link = document.createElement('a');
+      link.download = `${brandName.toLowerCase().replace(/\s+/g, '-')}-aetheria-2048px.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast("Exported 2048×2048 UHD PNG Logo!", "success");
+    }
+
+    function exportVectorSVG() {
+      const brandName = document.getElementById('brandNameInput').value || "AETHERIA";
+      const tagline = document.getElementById('taglineInput').value || "";
+      const primaryFont = document.getElementById('primaryFontSelect').value;
+      const secondaryFont = document.getElementById('secondaryFontSelect').value;
+      const accentColor = document.getElementById('primaryColorPicker').value;
+      const textColor = document.getElementById('textColorPicker').value;
+      const bgColor = document.getElementById('bgColorPicker').value;
+
+      const embeddedImageTag = state.currentEmblemDataUrl
+        ? `<image href="${state.currentEmblemDataUrl}" x="362" y="180" width="300" height="300" preserveAspectRatio="xMidYMid slice" />`
+        : `<polygon points="512,180 652,430 372,430" fill="none" stroke="${accentColor}" stroke-width="12"/><circle cx="512" cy="375" r="32" fill="#6366f1"/>`;
+
+      const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect width="1024" height="1024" fill="${bgColor}"/>
+  ${embeddedImageTag}
+  <text x="512" y="630" text-anchor="middle" fill="${textColor}" font-family="${primaryFont}, sans-serif" font-weight="700" font-size="76" letter-spacing="10">${brandName}</text>
+  <text x="512" y="700" text-anchor="middle" fill="${accentColor}" font-family="${secondaryFont}, sans-serif" font-weight="600" font-size="30" letter-spacing="5">${tagline}</text>
+</svg>`;
+
+      const blob = new Blob([svgContent], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${brandName.toLowerCase().replace(/\s+/g, '-')}-vector.svg`;
+      link.click();
+      URL.revokeObjectURL(url);
+      showToast("Exported Scalable Vector SVG!", "success");
+    }
+
+    // =========================================================================
+    // 5. MULTILINGUAL SWITCHER, CURRENCY FORMATTER & NAVIGATION
+    // =========================================================================
+    function changeLanguage(langCode) {
+      state.lang = langCode;
+      const isRTL = langCode === 'ar';
+      document.documentElement.lang = langCode;
+      document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+
+      const dict = TRANSLATIONS[langCode] || TRANSLATIONS.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+
+      updateLocalizedDate();
+      showToast(`Language switched (${langCode.toUpperCase()}) — Project preserved`, "info");
+    }
+
+    function changeCurrency(currCode) {
+      state.currency = currCode;
+      updatePricingDisplays();
+      updateAdminKPIs();
+    }
+
+    function formatMoney(usdAmount) {
+      const cfg = CURRENCIES[state.currency] || CURRENCIES.USD;
+      const converted = usdAmount * cfg.rate;
+      const isZeroDecimal = ['JPY', 'KRW'].includes(state.currency);
+      return new Intl.NumberFormat(cfg.locale, {
+        style: 'currency',
+        currency: state.currency,
+        maximumFractionDigits: isZeroDecimal ? 0 : 2,
+        minimumFractionDigits: isZeroDecimal ? 0 : (converted % 1 === 0 ? 0 : 2)
+      }).format(converted);
+    }
+
+    function updateLocalizedDate() {
+      const cfg = CURRENCIES[state.currency] || CURRENCIES.USD;
+      const formatted = new Intl.DateTimeFormat(state.lang === 'ar' ? 'ar-SA' : cfg.locale, {
+        dateStyle: 'full'
+      }).format(new Date());
+      document.getElementById('localizedDateDisplay').textContent = formatted;
+    }
+
+    function setBillingCycle(cycle) {
+      state.billingCycle = cycle;
+      document.getElementById('bill-monthly').className = cycle === 'monthly'
+        ? "px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 text-white transition"
+        : "px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition";
+      document.getElementById('bill-annual').className = cycle === 'annual'
+        ? "px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-indigo-600 text-white transition flex items-center gap-1.5"
+        : "px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition flex items-center gap-1.5";
+      updatePricingDisplays();
+    }
+
+    function updatePricingDisplays() {
+      const discount = state.billingCycle === 'annual' ? 0.8 : 1;
+      document.getElementById('price-free').textContent = formatMoney(0);
+      document.getElementById('price-pro').textContent = formatMoney(Math.round(29 * discount));
+      document.getElementById('price-premium').textContent = formatMoney(Math.round(79 * discount));
+    }
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+        tab.classList.add('text-slate-300');
+      });
+      const activeDesktop = document.getElementById(`nav-${viewName}`);
+      if (activeDesktop) {
+        activeDesktop.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+        activeDesktop.classList.remove('text-slate-300');
+      }
+
+      document.querySelectorAll('.m-nav-tab').forEach(tab => {
+        tab.classList.remove('bg-indigo-600', 'text-white');
+        tab.classList.add('text-slate-300');
+      });
+      const activeMobile = document.getElementById(`m-nav-${viewName}`);
+      if (activeMobile) {
+        activeMobile.classList.add('bg-indigo-600', 'text-white');
+        activeMobile.classList.remove('text-slate-300');
+      }
+
+      if (viewName === 'fonts') renderFontVault();
+    }
+
+    // =========================================================================
+    // 6. TYPOGRAPHY VAULT, CHECKOUT MODAL & ADMIN DASHBOARD
+    // =========================================================================
+    function renderFontVault() {
+      const grid = document.getElementById('fontVaultGrid');
+      const previewText = document.getElementById('vaultPreviewInput').value || "AETHERIA • أثيريا";
+      const filter = document.getElementById('vaultCategoryFilter').value;
+
+      const filtered = FONT_LIBRARY.filter(f => filter === 'ALL' || f.category === filter);
+      grid.innerHTML = filtered.map(font => `
+        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between gap-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-white">${font.name}</h4>
+              <span class="text-[11px] text-slate-400">${font.style}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">${font.category}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">✓ ${font.license}</span>
+            </div>
+          </div>
+
+          <div class="py-4 px-3 rounded-xl bg-obsidian-950/90 border border-white/5 text-center overflow-hidden">
+            <p style="font-family: '${font.name}', sans-serif;" class="text-xl sm:text-2xl text-slate-100 truncate">
+              ${previewText}
+            </p>
+            <p style="font-family: '${font.name}', sans-serif;" class="text-xs text-amber-400/80 mt-1 truncate">
+              ${font.sample}
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="applyVaultFont('${font.name}', 'primary')" class="flex-1 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-200 hover:text-white border border-indigo-500/30 text-xs font-semibold transition">
+              Use as Primary
+            </button>
+            <button onclick="applyVaultFont('${font.name}', 'secondary')" class="flex-1 py-2 rounded-xl bg-white/5 hover:bg-white/15 text-slate-200 border border-white/10 text-xs font-semibold transition">
+              Use as Secondary
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function applyVaultFont(fontName, target) {
+      const selectId = target === 'primary' ? 'primaryFontSelect' : 'secondaryFontSelect';
+      const selectEl = document.getElementById(selectId);
+      // Add option dynamically if not in secondary list
+      if (![...selectEl.options].some(o => o.value === fontName)) {
+        const opt = document.createElement('option');
+        opt.value = fontName;
+        opt.textContent = fontName;
+        selectEl.appendChild(opt);
+      }
+      selectEl.value = fontName;
+      switchView('studio');
+      updateCanvasState();
+      showToast(`Applied "${fontName}" as ${target} typeface`, "success");
+    }
+
+    // Checkout Modal Controls
+    let pendingPlanName = "Pro Studio";
+    function openCheckoutModal(planName, usdBase) {
+      pendingPlanName = planName;
+      const discount = state.billingCycle === 'annual' ? 0.8 : 1;
+      const finalUsd = usdBase === 0 ? 0 : Math.round(usdBase * discount);
+
+      document.getElementById('checkoutPlanName').textContent = `${planName} (${state.billingCycle.toUpperCase()})`;
+      document.getElementById('checkoutCurrencyLabel').textContent = state.currency;
+      document.getElementById('checkoutAmountDisplay').textContent = formatMoney(finalUsd);
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    function selectPaymentMethod(btn) {
+      document.querySelectorAll('.pay-method').forEach(el => {
+        el.classList.remove('bg-indigo-600/20', 'border-indigo-500', 'text-white');
+        el.classList.add('bg-obsidian-900', 'border-white/10', 'text-slate-300');
+      });
+      btn.classList.remove('bg-obsidian-900', 'border-white/10', 'text-slate-300');
+      btn.classList.add('bg-indigo-600/20', 'border-indigo-500', 'text-white');
+    }
+
+    function completeSubscription() {
+      state.activePlan = pendingPlanName;
+      document.getElementById('currentPlanBadge').textContent = pendingPlanName.toUpperCase();
+      closeCheckoutModal();
+      showToast(`Activated ${pendingPlanName} with worldwide commercial rights!`, "success");
+    }
+
+    // Admin Dashboard Helpers
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById(`admin-panel-${tab}`).classList.remove('hidden');
+
+      document.querySelectorAll('.admin-subtab').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white');
+        b.classList.add('text-slate-300');
+      });
+      document.getElementById(`admintab-${tab}`).classList.add('bg-indigo-600', 'text-white');
+      document.getElementById(`admintab-${tab}`).classList.remove('text-slate-300');
+    }
+
+    function updateAdminKPIs() {
+      const cfg = CURRENCIES[state.currency] || CURRENCIES.USD;
+      const numFmt = new Intl.NumberFormat(cfg.locale);
+      document.getElementById('kpi-users').textContent = numFmt.format(148920);
+      document.getElementById('kpi-gens').textContent = numFmt.format(64310);
+      document.getElementById('kpi-mrr').textContent = formatMoney(412850);
+      document.getElementById('kpi-cost').textContent = formatMoney(0.018);
+    }
+
+    function renderAdminUsers(filterText = "") {
+      const tbody = document.getElementById('adminUsersTableBody');
+      const q = filterText.toLowerCase();
+      const rows = ADMIN_USERS_DATA.filter(u =>
+        u.name.toLowerCase().includes(q) ||
+        u.country.toLowerCase().includes(q) ||
+        u.gateway.toLowerCase().includes(q)
+      );
+      tbody.innerHTML = rows.map(u => `
+        <tr class="hover:bg-white/5 transition">
+          <td class="py-3 px-3 font-semibold text-white">${u.name}</td>
+          <td class="py-3 px-3">${u.country}</td>
+          <td class="py-3 px-3"><span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">${u.plan}</span></td>
+          <td class="py-3 px-3 text-slate-300">${u.gateway}</td>
+          <td class="py-3 px-3"><span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">● ${u.status}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function filterAdminUsers() {
+      renderAdminUsers(document.getElementById('adminUserSearch').value);
+    }
+
+    // Toast Notification Utility (No alert() used anywhere)
+    function showToast(message, type = "info") {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      const borderClass = type === 'success' ? 'border-emerald-500/50 bg-emerald-950/90 text-emerald-100'
+        : type === 'error' ? 'border-rose-500/50 bg-rose-950/90 text-rose-100'
+        : 'border-indigo-500/50 bg-obsidian-900/95 text-slate-100';
+
+      toast.className = `pointer-events-auto px-4 py-3 rounded-xl border ${borderClass} shadow-2xl backdrop-blur-md text-xs font-medium flex items-center gap-2 transition-all duration-300`;
+      toast.innerHTML = `<span>${type === 'success' ? '✅' : type === 'error' ? '⚠️' : '✨'}</span><span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3600);
+    }
+
+    // Initialize Application on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      updateCanvasState();
+      updateLocalizedDate();
+      updatePricingDisplays();
+      updateAdminKPIs();
+      renderAdminUsers();
+      renderFontVault();
+    });
+  </script>
+</body>
+</html>
